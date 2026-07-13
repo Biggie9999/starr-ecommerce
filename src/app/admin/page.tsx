@@ -139,7 +139,7 @@ export default function AdminDashboard() {
           </div>
           
           <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Price ($)</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Price (₦)</label>
             <input type="number" step="0.01" className="input-field" value={price} onChange={e => setPrice(e.target.value)} required />
           </div>
           

@@ -48,7 +48,7 @@ export default function ProductDetailsClient({ product }: ProductDetailsProps) {
       <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
         <div>
           <h1 style={{ marginBottom: '0.5rem' }}>{product.name}</h1>
-          <p className="product-price" style={{ fontSize: '1.5rem' }}>${product.price.toFixed(2)}</p>
+          <p className="product-price" style={{ fontSize: '1.5rem' }}>₦{product.price.toFixed(2)}</p>
         </div>
         
         <div>

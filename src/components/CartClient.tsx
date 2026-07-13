@@ -38,7 +38,7 @@ export default function CartClient() {
                       <p style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Size: {item.size}</p>
                     </div>
                     <div style={{ fontWeight: '600', fontSize: '1.125rem' }}>
-                      ${(item.price * item.quantity).toFixed(2)}
+                      ₦{(item.price * item.quantity).toFixed(2)}
                     </div>
                   </div>
                   
@@ -78,7 +78,7 @@ export default function CartClient() {
             
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', color: 'var(--text-muted)' }}>
               <span>Subtotal</span>
-              <span>${cartTotal.toFixed(2)}</span>
+              <span>₦{cartTotal.toFixed(2)}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
               <span>Shipping</span>
@@ -87,7 +87,7 @@ export default function CartClient() {
             
             <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border)', paddingTop: '1.5rem', marginBottom: '2rem', fontSize: '1.25rem', fontWeight: '700' }}>
               <span>Total</span>
-              <span>${cartTotal.toFixed(2)}</span>
+              <span>₦{cartTotal.toFixed(2)}</span>
             </div>
             
             <Link href="/checkout" className="btn btn-primary" style={{ display: 'block', width: '100%', textAlign: 'center', padding: '1rem' }}>

@@ -72,7 +72,7 @@ export default function CheckoutClient() {
             />
           </div>
           <button type="submit" className="btn btn-primary" style={{ padding: '1rem', fontSize: '1.125rem', marginTop: '1rem' }}>
-            Pay ${cartTotal.toFixed(2)} with Paystack
+            Pay ₦{cartTotal.toFixed(2)} with Paystack
           </button>
         </form>
       </div>
@@ -87,13 +87,13 @@ export default function CheckoutClient() {
                   <div style={{ fontWeight: 500 }}>{item.name}</div>
                   <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>Size: {item.size} &times; {item.quantity}</div>
                 </div>
-                <div style={{ fontWeight: 600 }}>${(item.price * item.quantity).toFixed(2)}</div>
+                <div style={{ fontWeight: 600 }}>₦{(item.price * item.quantity).toFixed(2)}</div>
               </div>
             ))}
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 700 }}>
             <span>Total</span>
-            <span>${cartTotal.toFixed(2)}</span>
+            <span>₦{cartTotal.toFixed(2)}</span>
           </div>
         </div>
       </div>

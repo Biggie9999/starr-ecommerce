@@ -23,7 +23,7 @@ export default function ProductCard({ id, name, price, imageUrl }: ProductCardPr
         <div className="product-info">
           <div>
             <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{name}</h3>
-            <p className="product-price">${price.toFixed(2)}</p>
+            <p className="product-price">₦{price.toFixed(2)}</p>
           </div>
         </div>
         <div className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>View Details</div>
