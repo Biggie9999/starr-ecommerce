@@ -13,7 +13,7 @@ export default function Navbar() {
           <Link href="/" className="nav-brand">STARR.</Link>
           <div className="nav-links">
             <Link href="/" className="nav-link">Shop</Link>
-            <Link href="/admin" className="nav-link">Admin</Link>
+
             <button 
               className="btn btn-secondary" 
               style={{ position: 'relative', padding: '0.5rem 1rem' }}
