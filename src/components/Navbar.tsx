@@ -13,8 +13,9 @@ export default function Navbar() {
     <>
       <nav className="navbar">
         <div className="container">
-          <Link href="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center' }}>
+          <Link href="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none' }}>
             <Image src="/logo.jpg" alt="Starr Logo" width={40} height={40} style={{ borderRadius: '0.25rem', objectFit: 'cover' }} />
+            <span style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '0.05em', color: 'var(--text)' }}>STARR</span>
           </Link>
           <div className="nav-links">
             <Link href="/" className="nav-link">Shop</Link>

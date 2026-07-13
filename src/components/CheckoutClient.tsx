@@ -22,9 +22,8 @@ export default function CheckoutClient() {
 
   const onSuccess = (reference: any) => {
     // Implementation for whatever you want to do with reference and after success call.
-    alert("Payment successful! Reference: " + reference.reference);
     clearCart();
-    router.push("/");
+    router.push("/success");
   };
 
   const onClose = () => {

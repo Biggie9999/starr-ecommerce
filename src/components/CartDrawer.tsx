@@ -42,7 +42,7 @@ export default function CartDrawer() {
                       <span>{item.quantity}</span>
                       <button className="size-btn" style={{ width: '24px', height: '24px' }} onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
                     </div>
-                    <span style={{ fontWeight: 600 }}>${(item.price * item.quantity).toFixed(2)}</span>
+                    <span style={{ fontWeight: 600 }}>₦{(item.price * item.quantity).toFixed(2)}</span>
                   </div>
                 </div>
                 <button 
@@ -60,7 +60,7 @@ export default function CartDrawer() {
           <div className="cart-footer">
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', fontSize: '1.25rem', fontWeight: 600 }}>
               <span>Total</span>
-              <span>${cartTotal.toFixed(2)}</span>
+              <span>₦{cartTotal.toFixed(2)}</span>
             </div>
             <Link href="/checkout" style={{ textDecoration: 'none' }}>
               <button className="btn btn-primary" style={{ width: '100%' }} onClick={() => setIsCartOpen(false)}>
