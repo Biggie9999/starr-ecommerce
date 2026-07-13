@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import ProductCard from "@/components/ProductCard";
 import CampaignModal from "@/components/CampaignModal";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   // Fetch products from database
   const products = await prisma.product.findMany({
