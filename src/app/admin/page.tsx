@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [imagesInput, setImagesInput] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [sizesInput, setSizesInput] = useState("S,M,L,XL");
   
   const [loading, setLoading] = useState(false);
@@ -31,10 +31,30 @@ export default function AdminDashboard() {
     setLoading(true);
     setMessage("");
 
-    const images = imagesInput.split(",").map(url => url.trim()).filter(url => url);
+    if (!imageFile) {
+      setMessage("Please select an image");
+      setLoading(false);
+      return;
+    }
+
     const sizes = sizesInput.split(",").map(s => s.trim()).filter(s => s);
 
     try {
+      // 1. Upload the file to Vercel Blob
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      
+      if (!uploadRes.ok) throw new Error("Failed to upload image");
+      
+      const uploadData = await uploadRes.json();
+      const imageUrl = uploadData.url;
+
+      // 2. Create the product with the returned URL
       const res = await fetch("/api/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,7 +62,7 @@ export default function AdminDashboard() {
           name,
           description,
           price,
-          images,
+          images: [imageUrl],
           sizes
         })
       });
@@ -53,7 +73,7 @@ export default function AdminDashboard() {
       setName("");
       setDescription("");
       setPrice("");
-      setImagesInput("");
+      setImageFile(null);
       
       // Navigate to home to see the product after a short delay
       setTimeout(() => {
@@ -124,8 +144,14 @@ export default function AdminDashboard() {
           </div>
           
           <div>
-            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Image URLs (comma separated)</label>
-            <input type="text" className="input-field" placeholder="https://example.com/image1.jpg, ..." value={imagesInput} onChange={e => setImagesInput(e.target.value)} required />
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Product Image (Photo Library)</label>
+            <input 
+              type="file" 
+              accept="image/*"
+              className="input-field" 
+              onChange={e => e.target.files && setImageFile(e.target.files[0])} 
+              required 
+            />
           </div>
           
           <div>
