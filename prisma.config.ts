@@ -8,7 +8,5 @@ export default defineConfig({
   migrations: {
     path: "prisma/migrations",
   },
-  datasource: {
-    url: process.env["DATABASE_URL"] || process.env["POSTGRES_PRISMA_URL"],
-  },
+  // Removed datasource override to use schema.prisma urls directly
 });
