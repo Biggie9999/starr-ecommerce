@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   // Prisma v6 uses env by default, or it gets it from prisma.config.ts
 }
 
