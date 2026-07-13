@@ -28,14 +28,14 @@ export default function Footer() {
     <footer style={{ 
       backgroundColor: '#111827', 
       color: '#f9fafb', 
-      padding: '4rem 1.5rem 2rem 1.5rem',
+      padding: '2rem 1.5rem 1.5rem 1.5rem',
       marginTop: 'auto'
     }}>
       <div className="container" style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-        gap: '3rem',
-        marginBottom: '3rem'
+        gap: '1.5rem',
+        marginBottom: '1.5rem'
       }}>
         <div>
           <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 800 }}>STARR.</h3>
