@@ -240,9 +240,16 @@ h3 { font-size: 1.5rem; }
 /* Product Grid */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   padding: 2rem 0;
+}
+
+@media (min-width: 640px) {
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
 }
 
 .product-image-container {
