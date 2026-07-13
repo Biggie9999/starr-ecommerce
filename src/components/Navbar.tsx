@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/context/CartContext";
+import Image from "next/image";
 
 export default function Navbar() {
   const { items } = useCart();
@@ -12,7 +13,9 @@ export default function Navbar() {
     <>
       <nav className="navbar">
         <div className="container">
-          <Link href="/" className="nav-brand">STARR.</Link>
+          <Link href="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center' }}>
+            <Image src="/logo.jpg" alt="Starr Logo" width={40} height={40} style={{ borderRadius: '0.25rem', objectFit: 'cover' }} />
+          </Link>
           <div className="nav-links">
             <Link href="/" className="nav-link">Shop</Link>
 
