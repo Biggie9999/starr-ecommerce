@@ -101,6 +101,26 @@ a {
   background-color: var(--foreground);
 }
 
+/* Forms */
+.input-field {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  font-family: var(--font-outfit);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  border-radius: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  border-color: var(--foreground);
+  box-shadow: inset 0 0 0 1px var(--foreground);
+}
+
 /* Navbar */
 .navbar {
   position: fixed;
