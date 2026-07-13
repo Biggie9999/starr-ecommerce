@@ -18,7 +18,6 @@ export default function AdminDashboard() {
   const [orders, setOrders] = useState<any[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"products" | "orders">("products");
-  const [editingId, setEditingId] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
