@@ -16,6 +16,7 @@ model Product {
   name        String
   description String
   price       Float
+  category    String   @default("Tees")
   images      Image[]
   sizes       Size[]
   orders      OrderItem[]

@@ -10,10 +10,14 @@ export default function AdminDashboard() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("Tees");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [sizesInput, setSizesInput] = useState("S,M,L,XL");
   
   const [products, setProducts] = useState<any[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"products" | "orders">("products");
   const [editingId, setEditingId] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(false);
@@ -26,6 +30,13 @@ export default function AdminDashboard() {
         .then(res => res.json())
         .then(data => {
           if (Array.isArray(data)) setProducts(data);
+        })
+        .catch(console.error);
+        
+      fetch("/api/orders")
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data)) setOrders(data);
         })
         .catch(console.error);
     }
@@ -45,6 +56,7 @@ export default function AdminDashboard() {
     setName(product.name);
     setDescription(product.description);
     setPrice(product.price.toString());
+    setCategory(product.category || "Tees");
     setSizesInput(product.sizes.map((s: any) => s.name).join(","));
     setMessage("");
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -67,8 +79,24 @@ export default function AdminDashboard() {
     setName("");
     setDescription("");
     setPrice("");
+    setCategory("Tees");
     setImageFile(null);
     setSizesInput("S,M,L,XL");
+  };
+
+  const handleUpdateOrderStatus = async (orderId: string, status: string) => {
+    try {
+      const res = await fetch(`/api/orders/${orderId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status })
+      });
+      if (res.ok) {
+        setOrders(orders.map(o => o.id === orderId ? { ...o, status } : o));
+      }
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -83,7 +111,7 @@ export default function AdminDashboard() {
         const res = await fetch(`/api/products/${editingId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, description, price, sizes })
+          body: JSON.stringify({ name, description, price, category, sizes })
         });
         if (!res.ok) throw new Error("Failed to update");
         
@@ -125,6 +153,7 @@ export default function AdminDashboard() {
           name,
           description,
           price,
+          category,
           images: [imageUrl],
           sizes
         })
@@ -164,8 +193,25 @@ export default function AdminDashboard() {
 
   return (
     <div className="container" style={{ padding: '4rem 1.5rem' }}>
-      <h1 style={{ marginBottom: '2rem' }}>Admin Dashboard</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+        <h1 style={{ margin: 0 }}>Admin Dashboard</h1>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <button 
+            className={`btn ${activeTab === 'products' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setActiveTab('products')}
+          >
+            Products
+          </button>
+          <button 
+            className={`btn ${activeTab === 'orders' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setActiveTab('orders')}
+          >
+            Orders
+          </button>
+        </div>
+      </div>
       
+      {activeTab === 'products' ? (
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
         <div className="glass-card" style={{ flex: '1 1 400px', maxWidth: '600px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
@@ -203,6 +249,15 @@ export default function AdminDashboard() {
             <div>
               <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Price (₦)</label>
               <input type="number" step="0.01" className="input-field" value={price} onChange={e => setPrice(e.target.value)} required />
+            </div>
+
+            <div>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Category</label>
+              <select className="input-field" value={category} onChange={e => setCategory(e.target.value)} required style={{ width: '100%' }}>
+                <option value="Tees">Tees</option>
+                <option value="Hoodies">Hoodies</option>
+                <option value="Accessories">Accessories</option>
+              </select>
             </div>
             
             {!editingId && (
@@ -256,6 +311,59 @@ export default function AdminDashboard() {
           </div>
         </div>
       </div>
+      ) : (
+      <div style={{ width: '100%' }}>
+        <div className="glass-card" style={{ width: '100%' }}>
+          <h2 style={{ marginBottom: '1.5rem' }}>Customer Orders</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {orders.length === 0 ? (
+              <p style={{ color: 'var(--text-muted)' }}>No orders found.</p>
+            ) : (
+              orders.map(order => (
+                <div key={order.id} style={{ padding: '1.5rem', border: '1px solid var(--border)', borderRadius: '0.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+                    <div>
+                      <h4 style={{ margin: 0, fontWeight: 700 }}>Order: {order.id}</h4>
+                      <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>Customer: {order.customerEmail}</p>
+                      <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>Total: ₦{order.totalAmount.toFixed(2)}</p>
+                      <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>Date: {new Date(order.createdAt).toLocaleString()}</p>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
+                      <span style={{ 
+                        padding: '0.25rem 0.75rem', 
+                        borderRadius: '9999px', 
+                        fontSize: '0.75rem', 
+                        fontWeight: 700,
+                        backgroundColor: order.status === 'PAID' ? 'var(--foreground)' : (order.status === 'SHIPPED' ? 'var(--success)' : 'var(--border)'),
+                        color: order.status === 'PENDING' ? 'black' : 'white'
+                      }}>
+                        {order.status}
+                      </span>
+                      {order.status === 'PAID' && (
+                        <button onClick={() => handleUpdateOrderStatus(order.id, 'SHIPPED')} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.75rem' }}>
+                          Mark as Shipped
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <div style={{ borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+                    <h5 style={{ margin: '0 0 0.5rem 0', fontWeight: 600 }}>Items:</h5>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      {order.items.map((item: any) => (
+                        <li key={item.id} style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                          {item.quantity}x {item.product?.name || 'Unknown Product'} (Size: {item.size}) - ₦{item.price.toFixed(2)}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+      )}
     </div>
   );
 }

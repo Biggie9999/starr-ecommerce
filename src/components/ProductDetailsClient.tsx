@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import { useToast } from "@/context/ToastContext";
 import { ChevronDown, ShieldCheck, Truck } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -10,6 +11,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
+  const { addToast } = useToast();
   const [activeAccordion, setActiveAccordion] = useState<string | null>(null);
 
   const handleAddToCart = () => {
@@ -26,6 +28,8 @@ export default function ProductDetailsClient({ product }: { product: any }) {
       size: selectedSize,
       imageUrl: product.images[0]?.url || ""
     });
+
+    addToast(`Added ${product.name} to cart.`);
   };
 
   const toggleAccordion = (id: string) => {

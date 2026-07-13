@@ -18,20 +18,21 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
 export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
-    const body = await request.json();
-    
+    const { name, description, price, category, sizes } = await request.json();
+
     // Update basic product fields
     await prisma.product.update({
       where: { id },
       data: {
-        name: body.name,
-        description: body.description,
-        price: parseFloat(body.price),
+        name,
+        description,
+        price: parseFloat(price),
+        category,
       }
     });
 
     // Update sizes
-    if (body.sizes && Array.isArray(body.sizes)) {
+    if (sizes && Array.isArray(sizes)) {
       await prisma.size.deleteMany({ where: { productId: id } });
       await prisma.product.update({
         where: { id },

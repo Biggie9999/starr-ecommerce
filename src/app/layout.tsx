@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 import { CartProvider } from "@/context/CartContext";
+import { ToastProvider } from "@/context/ToastContext";
 import Navbar from "@/components/Navbar";
 import CartDrawer from "@/components/CartDrawer";
 import Footer from "@/components/Footer";
@@ -28,14 +29,16 @@ export default function RootLayout({
       className={`${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <CartProvider>
-          <Navbar />
-          <main className="main-content">
-            {children}
-          </main>
-          <CartDrawer />
-          <Footer />
-        </CartProvider>
+        <ToastProvider>
+          <CartProvider>
+            <Navbar />
+            <main style={{ flex: 1 }}>
+              {children}
+            </main>
+            <CartDrawer />
+            <Footer />
+          </CartProvider>
+        </ToastProvider>
       </body>
     </html>
   );

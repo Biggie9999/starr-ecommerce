@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useToast } from "@/context/ToastContext";
 
 const InstagramIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -19,6 +22,8 @@ const FacebookIcon = () => (
 );
 
 export default function Footer() {
+  const { addToast } = useToast();
+
   return (
     <footer style={{ 
       backgroundColor: '#111827', 
@@ -54,12 +59,56 @@ export default function Footer() {
         </div>
 
         <div>
-          <h4 style={{ marginBottom: '1.5rem', fontWeight: 600 }}>Support</h4>
-          <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <li><Link href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>FAQ</Link></li>
-            <li><Link href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Shipping & Returns</Link></li>
-            <li><Link href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Contact Us</Link></li>
-          </ul>
+          <h4 style={{ marginBottom: '1.5rem', fontWeight: 600 }}>Newsletter</h4>
+          <p style={{ color: '#9ca3af', marginBottom: '1rem', fontSize: '0.875rem' }}>
+            Subscribe to get early access to new drops.
+          </p>
+          <form 
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.target as HTMLFormElement;
+              const email = (form.elements.namedItem('email') as HTMLInputElement).value;
+              try {
+                await fetch('/api/subscribers', {
+                  method: 'POST',
+                  body: JSON.stringify({ email })
+                });
+                addToast("Successfully subscribed to STARR drops!");
+                form.reset();
+              } catch(e) {}
+            }}
+            style={{ display: 'flex', gap: '0.5rem' }}
+          >
+            <input 
+              type="email" 
+              name="email"
+              placeholder="Enter your email" 
+              required
+              style={{ 
+                flex: 1, 
+                padding: '0.75rem', 
+                backgroundColor: 'transparent', 
+                border: '1px solid #374151', 
+                color: 'white', 
+                outline: 'none',
+                fontFamily: 'inherit'
+              }} 
+            />
+            <button 
+              type="submit" 
+              style={{ 
+                padding: '0.75rem 1.25rem', 
+                backgroundColor: 'white', 
+                color: 'black', 
+                border: 'none', 
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontFamily: 'inherit'
+              }}
+            >
+              Join
+            </button>
+          </form>
         </div>
       </div>
 

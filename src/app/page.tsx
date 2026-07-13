@@ -4,11 +4,18 @@ import CampaignModal from "@/components/CampaignModal";
 
 export const dynamic = 'force-dynamic';
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<{ category?: string }> }) {
+  const params = await searchParams;
+  const category = params.category;
+
   // Fetch products from database
   const products = await prisma.product.findMany({
-    include: { images: true }
+    where: category ? { category } : undefined,
+    include: { images: true },
+    orderBy: { createdAt: 'desc' }
   });
+
+  const categories = ["All", "Tees", "Hoodies", "Accessories"];
 
   return (
     <div>
@@ -46,12 +53,35 @@ export default async function Home() {
 
       {/* Product Grid */}
       <section className="container" style={{ padding: '6rem 1.5rem' }}>
-        <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', borderBottom: '2px solid var(--foreground)', paddingBottom: '1rem', display: 'inline-block' }}>New Arrivals</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
+          <h2 style={{ fontSize: '2.5rem', borderBottom: '2px solid var(--foreground)', paddingBottom: '0.5rem', margin: 0 }}>
+            {category ? category : "New Arrivals"}
+          </h2>
+          
+          <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+            {categories.map((cat) => (
+              <a 
+                key={cat} 
+                href={cat === "All" ? "/" : `/?category=${cat}`}
+                style={{
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  fontSize: '0.875rem',
+                  color: (category === cat) || (!category && cat === "All") ? 'var(--foreground)' : 'var(--text-muted)',
+                  borderBottom: (category === cat) || (!category && cat === "All") ? '2px solid var(--foreground)' : 'none',
+                  paddingBottom: '0.25rem',
+                  textDecoration: 'none'
+                }}
+              >
+                {cat}
+              </a>
+            ))}
+          </div>
+        </div>
         
         {products.length === 0 ? (
-          <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
-            <p>No products available yet.</p>
-            <p style={{ marginTop: '0.5rem', fontSize: '0.875rem' }}>Admin needs to upload some pieces.</p>
+          <div style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '4rem 0' }}>
+            <p>No products found.</p>
           </div>
         ) : (
           <div className="product-grid">

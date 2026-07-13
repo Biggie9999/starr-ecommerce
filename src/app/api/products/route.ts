@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { name, description, price, sizes, images } = data;
+    const { name, description, price, category, sizes, images } = data;
 
     // Very basic validation
     if (!name || !price) {
@@ -16,6 +16,7 @@ export async function POST(request: Request) {
         name,
         description: description || "",
         price: parseFloat(price),
+        category,
         sizes: {
           create: sizes.map((sizeName: string) => ({ name: sizeName }))
         },
