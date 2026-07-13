@@ -6,7 +6,7 @@ import { usePaystackPayment } from "react-paystack";
 import { useRouter } from "next/navigation";
 
 export default function CheckoutClient() {
-  const { items, cartTotal } = useCart();
+  const { items, cartTotal, clearCart } = useCart();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const router = useRouter();
@@ -23,6 +23,7 @@ export default function CheckoutClient() {
   const onSuccess = (reference: any) => {
     // Implementation for whatever you want to do with reference and after success call.
     alert("Payment successful! Reference: " + reference.reference);
+    clearCart();
     router.push("/");
   };
 
