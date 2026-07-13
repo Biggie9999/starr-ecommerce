@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --background: #0f1115;
-  --surface: #1a1d24;
-  --surface-hover: #232730;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --text: #f3f4f6;
-  --text-muted: #9ca3af;
-  --border: #2d3748;
+  --background: #fafafa;
+  --surface: #ffffff;
+  --surface-hover: #f3f4f6;
+  --primary: #ef4444;
+  --primary-hover: #dc2626;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
   --danger: #ef4444;
   --success: #10b981;
 }
@@ -85,14 +85,14 @@ h3 { font-size: 1.5rem; }
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.05);
   color: var(--text);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
@@ -103,10 +103,10 @@ h3 { font-size: 1.5rem; }
 
 /* Glassmorphism Cards */
 .glass-card {
-  background: rgba(26, 29, 36, 0.7);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 1rem;
   padding: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -114,15 +114,15 @@ h3 { font-size: 1.5rem; }
 
 .glass-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* Inputs */
 .input-field {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   color: var(--text);
@@ -141,7 +141,7 @@ h3 { font-size: 1.5rem; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(15, 17, 21, 0.8);
+  background: rgba(250, 250, 250, 0.8);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   padding: 1rem 0;
@@ -156,7 +156,7 @@ h3 { font-size: 1.5rem; }
 .nav-brand {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(to right, #fff, #9ca3af);
+  background: linear-gradient(to right, #111827, #6b7280);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-decoration: none;
@@ -183,7 +183,7 @@ h3 { font-size: 1.5rem; }
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
@@ -310,7 +310,7 @@ h3 { font-size: 1.5rem; }
 .cart-footer {
   padding: 1.5rem;
   border-top: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.02);
 }
 
 .cart-item {
@@ -409,8 +409,8 @@ h3 { font-size: 1.5rem; }
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--text);
   border: none;
   width: 40px;
   height: 40px;
@@ -424,7 +424,7 @@ h3 { font-size: 1.5rem; }
 }
 
 .slider-btn:hover {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .slider-btn.prev { left: 1rem; }

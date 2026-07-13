@@ -17,7 +17,7 @@ export default function Navbar() {
             <Link href="/" className="nav-link">Shop</Link>
 
             <Link 
-              href="/checkout"
+              href="/cart"
               className="btn btn-secondary" 
               style={{ position: 'relative', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
