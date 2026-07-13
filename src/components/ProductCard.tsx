@@ -26,8 +26,8 @@ export default function ProductCard({ id, name, price, imageUrl }: ProductCardPr
             <p className="product-price">${price.toFixed(2)}</p>
           </div>
         </div>
+        <div className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>View Details</div>
       </Link>
-      <button className="btn btn-primary" style={{ width: '100%' }}>Add to Cart</button>
     </div>
   );
 }
