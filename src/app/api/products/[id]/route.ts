@@ -38,7 +38,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         where: { id },
         data: {
           sizes: {
-            create: body.sizes.map((size: string) => ({ name: size }))
+            create: sizes.map((size: string) => ({ name: size }))
           }
         }
       });
