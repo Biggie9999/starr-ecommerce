@@ -14,7 +14,7 @@ export interface CartItem {
 
 interface CartContextType {
   items: CartItem[];
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: Omit<CartItem, 'id'>) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -49,17 +49,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, isLoaded]);
 
-  const addToCart = (item: CartItem) => {
+  const addToCart = (newItem: Omit<CartItem, 'id'>) => {
     setItems((prevItems) => {
-      const existingItem = prevItems.find((i) => i.productId === item.productId && i.size === item.size);
+      const existingItem = prevItems.find((i) => i.productId === newItem.productId && i.size === newItem.size);
       if (existingItem) {
         return prevItems.map((i) =>
-          i.productId === item.productId && i.size === item.size
-            ? { ...i, quantity: i.quantity + item.quantity }
+          i.productId === newItem.productId && i.size === newItem.size
+            ? { ...i, quantity: i.quantity + newItem.quantity }
             : i
         );
       }
-      return [...prevItems, item];
+      return [...prevItems, { ...newItem, id: Math.random().toString(36).substr(2, 9) }];
     });
     setIsCartOpen(true);
   };
