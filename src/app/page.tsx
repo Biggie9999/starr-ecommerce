@@ -14,31 +14,39 @@ export default async function Home() {
     <div>
       <CampaignModal />
       
-      {/* Hero Section */}
+      {/* Brutalist Editorial Hero Section */}
       <section style={{ 
-        height: '60vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=2000&q=80)',
+        height: '80vh', 
+        display: 'flex',
+        alignItems: 'flex-end',
+        background: 'url(https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2000&q=80)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        textAlign: 'center'
+        position: 'relative'
       }}>
-        <div style={{ padding: '0 1.5rem' }}>
-          <h1 style={{ marginBottom: '1rem', color: 'white' }}>Exclusive Pieces.</h1>
-          <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.8)', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem auto' }}>
-            Discover our latest collection of premium clothing. Crafted with precision and style.
-          </p>
-          <button className="btn btn-primary" style={{ padding: '1rem 2rem', fontSize: '1.125rem' }}>
-            Shop the Collection
+        {/* Dark overlay for contrast */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)' }} />
+        
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '4rem', width: '100%' }}>
+          <h1 style={{ 
+            color: 'white', 
+            fontSize: 'clamp(3rem, 8vw, 6rem)', 
+            lineHeight: 1, 
+            marginBottom: '1.5rem',
+            maxWidth: '800px',
+            letterSpacing: '-0.02em'
+          }}>
+            The New <br/><span style={{ color: 'var(--primary)' }}>Standard.</span>
+          </h1>
+          <button className="btn" style={{ backgroundColor: 'white', color: 'black', border: 'none' }}>
+            Shop Collection
           </button>
         </div>
       </section>
 
       {/* Product Grid */}
-      <section className="container" style={{ padding: '4rem 1.5rem' }}>
-        <h2 style={{ marginBottom: '2rem', textAlign: 'center' }}>New Arrivals</h2>
+      <section className="container" style={{ padding: '6rem 1.5rem' }}>
+        <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', borderBottom: '2px solid var(--foreground)', paddingBottom: '1rem', display: 'inline-block' }}>New Arrivals</h2>
         
         {products.length === 0 ? (
           <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
