@@ -5,11 +5,7 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
   try {
     const { id } = await params;
     
-    // Delete relations first
-    await prisma.size.deleteMany({ where: { productId: id } });
-    await prisma.productImage.deleteMany({ where: { productId: id } });
-    
-    // Delete product
+    // Delete product (relations like images and sizes will cascade automatically)
     await prisma.product.delete({ where: { id } });
     
     return NextResponse.json({ success: true });
