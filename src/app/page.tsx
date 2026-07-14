@@ -26,9 +26,9 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         height: '80vh', 
         display: 'flex',
         alignItems: 'flex-end',
-        background: 'url(https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2000&q=80)',
+        background: 'url(/hero.jpg)',
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center 20%',
         position: 'relative'
       }}>
         {/* Dark overlay for contrast */}
