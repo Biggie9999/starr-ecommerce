@@ -9,6 +9,9 @@ export default function CheckoutClient() {
   const { items, cartTotal, clearCart } = useCart();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
   const router = useRouter();
 
   const config = {
@@ -20,10 +23,33 @@ export default function CheckoutClient() {
 
   const initializePayment = usePaystackPayment(config);
 
-  const onSuccess = (reference: any) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    clearCart();
-    router.push("/success");
+  const onSuccess = async (reference: any) => {
+    try {
+      setIsProcessing(true);
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          reference: reference.reference,
+          name,
+          email,
+          phone,
+          address,
+          items,
+          total: cartTotal
+        })
+      });
+      if (!res.ok) console.error("Failed to save order to DB");
+      
+      clearCart();
+      router.push("/success");
+    } catch (e) {
+      console.error(e);
+      clearCart();
+      router.push("/success");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const onClose = () => {
@@ -33,7 +59,7 @@ export default function CheckoutClient() {
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !name) return;
+    if (!email || !name || !phone || !address) return;
     initializePayment({ onSuccess, onClose });
   };
 
@@ -71,8 +97,28 @@ export default function CheckoutClient() {
               required 
             />
           </div>
-          <button type="submit" className="btn btn-primary" style={{ padding: '1rem', fontSize: '1.125rem', marginTop: '1rem' }}>
-            Pay ₦{cartTotal.toFixed(2)} with Paystack
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Phone Number</label>
+            <input 
+              type="tel" 
+              className="input-field" 
+              value={phone} 
+              onChange={e => setPhone(e.target.value)} 
+              required 
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Delivery Address</label>
+            <textarea 
+              className="input-field" 
+              value={address} 
+              onChange={e => setAddress(e.target.value)} 
+              required 
+              style={{ minHeight: '100px', resize: 'vertical' }}
+            />
+          </div>
+          <button type="submit" className="btn btn-primary" disabled={isProcessing} style={{ padding: '1rem', fontSize: '1.125rem', marginTop: '1rem' }}>
+            {isProcessing ? 'Processing Order...' : `Pay ₦${cartTotal.toFixed(2)} with Paystack`}
           </button>
         </form>
       </div>

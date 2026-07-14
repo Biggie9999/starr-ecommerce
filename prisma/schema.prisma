@@ -41,6 +41,9 @@ model Size {
 model Order {
   id                String      @id @default(cuid())
   customerEmail     String
+  customerName      String?
+  deliveryAddress   String?
+  phoneNumber       String?
   totalAmount       Float
   status            String      @default("PENDING") // PENDING, PAID
   paystackReference String?
