@@ -52,7 +52,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       </section>
 
       {/* Product Grid */}
-      <section className="container" style={{ padding: '6rem 1.5rem' }}>
+      <section className="container" style={{ padding: '3rem 1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
           <h2 style={{ fontSize: '2.5rem', borderBottom: '2px solid var(--foreground)', paddingBottom: '0.5rem', margin: 0 }}>
             {category ? category : "New Arrivals"}
