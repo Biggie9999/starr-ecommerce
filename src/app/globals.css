@@ -28,6 +28,9 @@ html, body {
   font-family: var(--font-outfit);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+}
+
+body {
   padding-top: 73px;
 }
 
