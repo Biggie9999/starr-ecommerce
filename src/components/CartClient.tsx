@@ -19,8 +19,8 @@ export default function CartClient() {
   }
 
   return (
-    <div className="container" style={{ padding: '4rem 1.5rem' }}>
-      <h1 style={{ marginBottom: '2rem' }}>Shopping Cart</h1>
+    <div className="container" style={{ padding: '2rem 1.5rem 4rem 1.5rem' }}>
+      <h1 style={{ marginBottom: '2rem', fontSize: '2.5rem' }}>Shopping Cart</h1>
       
       <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
         <div style={{ flex: '1 1 500px' }}>
