@@ -302,7 +302,7 @@ export default function AdminDashboard() {
                   </div>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                     <button onClick={() => handleEdit(product)} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}>Edit</button>
-                    <button onClick={() => handleDelete(product.id)} className="btn" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', background: 'var(--danger)', color: 'white' }}>Delete</button>
+                    <button onClick={() => handleDelete(product.id)} className="btn" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', background: 'var(--primary)', color: 'white' }}>Delete</button>
                   </div>
                 </div>
               ))
