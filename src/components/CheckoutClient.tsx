@@ -15,7 +15,7 @@ export default function CheckoutClient() {
     reference: (new Date()).getTime().toString(),
     email: email,
     amount: cartTotal * 100, // Paystack amount is in kobo (base currency * 100)
-    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "pk_test_2c11dd140d238739f2fdff54c5d2b80aec8b9e51",
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "pk_live_487bcd15b31ec3a647f35535581b8f52e34c05b1",
   };
 
   const initializePayment = usePaystackPayment(config);
