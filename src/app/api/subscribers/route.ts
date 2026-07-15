@@ -49,7 +49,7 @@ export async function POST(req: Request) {
         `;
 
         await resend.emails.send({
-          from: "Starr Club <newsletter@resend.dev>",
+          from: "Starr Club <onboarding@resend.dev>",
           to: email,
           subject: "Welcome to STARR 🌟 - Here is 10% Off!",
           html: emailHtml,

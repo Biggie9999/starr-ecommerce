@@ -98,7 +98,7 @@ export async function POST(req: Request) {
         `;
 
         await resend.emails.send({
-          from: "Starr Shop <orders@resend.dev>", // We use the default test domain until they add their own
+          from: "Starr Shop <onboarding@resend.dev>", // We use the default test domain until they add their own
           to: email,
           subject: `Order Confirmation - STARR #${order.id.slice(-6).toUpperCase()}`,
           html: emailHtml,
