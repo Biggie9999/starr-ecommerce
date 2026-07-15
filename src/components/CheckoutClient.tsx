@@ -35,7 +35,13 @@ export default function CheckoutClient() {
           email,
           phone,
           address,
-          items,
+          items: items.map(item => ({
+            id: item.productId,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            size: item.size,
+          })),
           total: cartTotal
         })
       });
