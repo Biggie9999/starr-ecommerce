@@ -117,8 +117,8 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ success: true, orderId: order.id });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Checkout error:", error);
-    return NextResponse.json({ error: "Checkout failed" }, { status: 500 });
+    return NextResponse.json({ error: "Checkout failed", details: error?.message || String(error) }, { status: 500 });
   }
 }

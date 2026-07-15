@@ -40,8 +40,9 @@ export default function CheckoutClient() {
         })
       });
       if (!res.ok) {
-        console.error("Failed to save order to DB");
-        alert("There was an error saving your order. Please try again or contact support.");
+        const errData = await res.json().catch(() => ({}));
+        console.error("Failed to save order to DB", errData);
+        alert(`Database Error: ${errData.details || 'Unknown error'}`);
         return;
       }
       
