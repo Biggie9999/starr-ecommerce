@@ -52,11 +52,15 @@ export default function CheckoutClient() {
         return;
       }
       
+      const result = await res.json();
+      // Temporary debug: show email status
+      alert(`Order saved! Email status: ${result.emailStatus}${result.emailError ? ' - Error: ' + JSON.stringify(result.emailError) : ''}`);
+      
       clearCart();
       router.push("/success");
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      alert("Network error. Please try again.");
+      alert(`Network error: ${e?.message || 'Unknown'}`);
     } finally {
       setIsProcessing(false);
     }

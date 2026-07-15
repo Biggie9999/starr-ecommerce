@@ -116,7 +116,7 @@ export async function POST(req: Request) {
         `;
 
         const { data, error } = await resend.emails.send({
-          from: "Starr Shop <onboarding@resend.dev>", // We use the default test domain until they add their own
+          from: "Starr Shop <onboarding@resend.dev>",
           to: "olusojiteniola26@gmail.com",
           subject: `New Order Received - STARR #${order.id.slice(-6).toUpperCase()}`,
           html: emailHtml,
@@ -124,17 +124,18 @@ export async function POST(req: Request) {
 
         if (error) {
           console.error("RESEND EXACT ERROR:", error);
+          return NextResponse.json({ success: true, orderId: order.id, emailStatus: "FAILED", emailError: error });
         } else {
           console.log("RESEND SUCCESS:", data);
+          return NextResponse.json({ success: true, orderId: order.id, emailStatus: "SENT", emailData: data });
         }
-      } catch (emailError) {
+      } catch (emailError: any) {
         console.error("Failed to execute Resend logic:", emailError);
+        return NextResponse.json({ success: true, orderId: order.id, emailStatus: "CRASHED", emailError: emailError?.message || String(emailError) });
       }
     } else {
-      console.log("Skipping email: RESEND_API_KEY is not set.");
+      return NextResponse.json({ success: true, orderId: order.id, emailStatus: "SKIPPED_NO_API_KEY" });
     }
-
-    return NextResponse.json({ success: true, orderId: order.id });
   } catch (error: any) {
     console.error("Checkout error:", error);
     return NextResponse.json({ error: "Checkout failed", details: error?.message || String(error) }, { status: 500 });
