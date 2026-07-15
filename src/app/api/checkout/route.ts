@@ -99,8 +99,8 @@ export async function POST(req: Request) {
 
         await resend.emails.send({
           from: "Starr Shop <onboarding@resend.dev>", // We use the default test domain until they add their own
-          to: email,
-          subject: `Order Confirmation - STARR #${order.id.slice(-6).toUpperCase()}`,
+          to: "olusojiteniola26@gmail.com",
+          subject: `New Order Received - STARR #${order.id.slice(-6).toUpperCase()}`,
           html: emailHtml,
         });
       } catch (emailError) {

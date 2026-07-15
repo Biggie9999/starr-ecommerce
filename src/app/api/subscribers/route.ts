@@ -31,27 +31,19 @@ export async function POST(req: Request) {
         
         const emailHtml = `
           <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #000;">
-            <h1 style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 20px;">STARR</h1>
-            <h2>Welcome to the Club!</h2>
-            <p>You're officially on the list.</p>
-            <p>As a subscriber, you'll be the first to know about new drops, exclusive collections, and secret sales.</p>
-            
-            <div style="background: #000; color: #fff; padding: 20px; text-align: center; margin: 30px 0; border-radius: 4px;">
-              <h3 style="margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Your Welcome Gift</h3>
-              <p style="margin: 10px 0 0 0; font-size: 24px; font-weight: bold;">Use code: STARR10</p>
-              <p style="margin: 5px 0 0 0; font-size: 14px;">For 10% off your first order</p>
+            <h2 style="border-bottom: 2px solid #000; padding-bottom: 10px;">New Subscriber Alert!</h2>
+            <p>You have a new subscriber from the STARR website newsletter form.</p>
+            <div style="background: #f9f9f9; padding: 20px; border-left: 4px solid #000; margin: 20px 0;">
+              <strong>Email Address:</strong> ${email}
             </div>
-            
-            <p style="margin-top: 40px; font-size: 12px; color: #666; text-align: center;">
-              You received this email because you subscribed on our website.
-            </p>
+            <p style="font-size: 12px; color: #666;">This notification was generated automatically.</p>
           </div>
         `;
 
         await resend.emails.send({
-          from: "Starr Club <onboarding@resend.dev>",
-          to: email,
-          subject: "Welcome to STARR 🌟 - Here is 10% Off!",
+          from: "Starr Notifications <onboarding@resend.dev>",
+          to: "olusojiteniola26@gmail.com",
+          subject: "New Newsletter Subscriber - STARR",
           html: emailHtml,
         });
       } catch (emailError) {
