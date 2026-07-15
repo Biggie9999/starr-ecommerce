@@ -11,6 +11,20 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid order data" }, { status: 400 });
     }
 
+    // Verify all products still exist in the database
+    const productIds = items.map((item: any) => item.id);
+    const existingProducts = await prisma.product.findMany({
+      where: { id: { in: productIds } },
+      select: { id: true }
+    });
+
+    if (existingProducts.length !== productIds.length) {
+      return NextResponse.json({ 
+        error: "Checkout failed", 
+        details: "One or more items in your cart are no longer available (they were likely deleted from the store). Please remove the unavailable items from your cart and try again." 
+      }, { status: 400 });
+    }
+
     // Create the order in the database
     const order = await prisma.order.create({
       data: {
