@@ -21,9 +21,11 @@ export async function POST(req: Request) {
     });
 
     if (existingProducts.length !== uniqueProductIds.length) {
+      const foundIds = existingProducts.map(p => p.id);
+      const missingIds = uniqueProductIds.filter(id => !foundIds.includes(id));
       return NextResponse.json({ 
         error: "Checkout failed", 
-        details: "One or more items in your cart are no longer available (they were likely deleted from the store). Please remove the unavailable items from your cart and try again." 
+        details: `The following product IDs are in your cart but missing from the database: ${missingIds.join(", ")}. Please completely empty your cart and try again.` 
       }, { status: 400 });
     }
 
