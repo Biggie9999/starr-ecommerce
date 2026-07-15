@@ -39,14 +39,17 @@ export default function CheckoutClient() {
           total: cartTotal
         })
       });
-      if (!res.ok) console.error("Failed to save order to DB");
+      if (!res.ok) {
+        console.error("Failed to save order to DB");
+        alert("There was an error saving your order. Please try again or contact support.");
+        return;
+      }
       
       clearCart();
       router.push("/success");
     } catch (e) {
       console.error(e);
-      clearCart();
-      router.push("/success");
+      alert("Network error. Please try again.");
     } finally {
       setIsProcessing(false);
     }

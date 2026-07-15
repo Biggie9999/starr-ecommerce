@@ -97,15 +97,20 @@ export async function POST(req: Request) {
           </div>
         `;
 
-        await resend.emails.send({
+        const { data, error } = await resend.emails.send({
           from: "Starr Shop <onboarding@resend.dev>", // We use the default test domain until they add their own
           to: "olusojiteniola26@gmail.com",
           subject: `New Order Received - STARR #${order.id.slice(-6).toUpperCase()}`,
           html: emailHtml,
         });
+
+        if (error) {
+          console.error("RESEND EXACT ERROR:", error);
+        } else {
+          console.log("RESEND SUCCESS:", data);
+        }
       } catch (emailError) {
-        console.error("Failed to send email:", emailError);
-        // Don't fail the checkout if email fails
+        console.error("Failed to execute Resend logic:", emailError);
       }
     } else {
       console.log("Skipping email: RESEND_API_KEY is not set.");
