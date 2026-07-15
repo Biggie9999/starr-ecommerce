@@ -13,12 +13,14 @@ export async function POST(req: Request) {
 
     // Verify all products still exist in the database
     const productIds = items.map((item: any) => item.id);
+    const uniqueProductIds = Array.from(new Set(productIds)) as string[];
+    
     const existingProducts = await prisma.product.findMany({
-      where: { id: { in: productIds } },
+      where: { id: { in: uniqueProductIds } },
       select: { id: true }
     });
 
-    if (existingProducts.length !== productIds.length) {
+    if (existingProducts.length !== uniqueProductIds.length) {
       return NextResponse.json({ 
         error: "Checkout failed", 
         details: "One or more items in your cart are no longer available (they were likely deleted from the store). Please remove the unavailable items from your cart and try again." 
