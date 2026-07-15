@@ -192,18 +192,20 @@ export default function AdminDashboard() {
 
   return (
     <div className="container" style={{ padding: '4rem 1.5rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ margin: 0 }}>Admin Dashboard</h1>
-        <div style={{ display: 'flex', gap: '1rem' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+        <h1 style={{ margin: 0, fontSize: 'clamp(1.5rem, 5vw, 2.5rem)' }}>Admin Dashboard</h1>
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           <button 
             className={`btn ${activeTab === 'products' ? 'btn-primary' : 'btn-secondary'}`}
             onClick={() => setActiveTab('products')}
+            style={{ flex: '1 1 auto', textAlign: 'center' }}
           >
             Products
           </button>
           <button 
             className={`btn ${activeTab === 'orders' ? 'btn-primary' : 'btn-secondary'}`}
             onClick={() => setActiveTab('orders')}
+            style={{ flex: '1 1 auto', textAlign: 'center' }}
           >
             Orders
           </button>
@@ -211,8 +213,8 @@ export default function AdminDashboard() {
       </div>
       
       {activeTab === 'products' ? (
-      <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-        <div className="glass-card" style={{ flex: '1 1 400px', maxWidth: '600px' }}>
+      <div style={{ display: 'flex', gap: '2rem', flexDirection: 'column', width: '100%' }}>
+        <div className="glass-card" style={{ width: '100%' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h2>{editingId ? "Edit Product" : "Upload New Product"}</h2>
             {editingId && (
@@ -283,26 +285,26 @@ export default function AdminDashboard() {
           </form>
         </div>
 
-        <div className="glass-card" style={{ flex: '1 1 400px' }}>
-          <h2 style={{ marginBottom: '1.5rem' }}>Manage Products</h2>
+        <div className="glass-card" style={{ width: '100%' }}>
+          <h2 style={{ marginBottom: '1.5rem', fontSize: '1.5rem' }}>Manage Products</h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {products.length === 0 ? (
               <p style={{ color: 'var(--text-muted)' }}>No products found.</p>
             ) : (
               products.map(product => (
-                <div key={product.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', border: '1px solid var(--border)', borderRadius: '0.5rem' }}>
+                <div key={product.id} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1rem', border: '1px solid var(--border)', borderRadius: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     {product.images && product.images[0] && (
                       <img src={product.images[0].url} alt={product.name} style={{ width: '50px', height: '50px', objectFit: 'cover', borderRadius: '0.25rem' }} />
                     )}
                     <div>
-                      <h4 style={{ margin: 0 }}>{product.name}</h4>
+                      <h4 style={{ margin: 0, fontSize: '1.125rem' }}>{product.name}</h4>
                       <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>₦{product.price.toFixed(2)}</p>
                     </div>
                   </div>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button onClick={() => handleEdit(product)} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem' }}>Edit</button>
-                    <button onClick={() => handleDelete(product.id)} className="btn" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', background: 'var(--primary)', color: 'white' }}>Delete</button>
+                  <div style={{ display: 'flex', gap: '0.5rem', width: '100%' }}>
+                    <button onClick={() => handleEdit(product)} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', flex: 1 }}>Edit</button>
+                    <button onClick={() => handleDelete(product.id)} className="btn" style={{ padding: '0.5rem 1rem', fontSize: '0.875rem', background: 'var(--primary)', color: 'white', flex: 1 }}>Delete</button>
                   </div>
                 </div>
               ))
