@@ -15,14 +15,12 @@ export async function POST(req: Request) {
       where: { email }
     });
 
-    if (existing) {
-      return NextResponse.json({ success: true, message: "Already subscribed!" });
+    // Save subscriber if not exists
+    if (!existing) {
+      await prisma.subscriber.create({
+        data: { email }
+      });
     }
-
-    // Save subscriber
-    await prisma.subscriber.create({
-      data: { email }
-    });
 
     // Send Welcome Email
     if (process.env.RESEND_API_KEY) {
