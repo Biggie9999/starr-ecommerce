@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     
     const existingProducts = await prisma.product.findMany({
       where: { id: { in: uniqueProductIds } },
-      select: { id: true }
+      select: { id: true, price: true, name: true }
     });
 
     if (existingProducts.length !== uniqueProductIds.length) {
@@ -29,6 +29,51 @@ export async function POST(req: Request) {
       }, { status: 400 });
     }
 
+    // Calculate true total from database prices
+    let calculatedTotal = 0;
+    const verifiedItems = items.map((clientItem: any) => {
+      const dbProduct = existingProducts.find(p => p.id === clientItem.id);
+      if (!dbProduct) throw new Error("Product missing during calculation");
+      
+      const truePrice = dbProduct.price;
+      calculatedTotal += truePrice * clientItem.quantity;
+      
+      return {
+        productId: dbProduct.id,
+        quantity: clientItem.quantity,
+        size: clientItem.size,
+        price: truePrice,
+        name: dbProduct.name
+      };
+    });
+
+    // Verify payment with Paystack
+    if (process.env.PAYSTACK_SECRET_KEY) {
+      try {
+        const paystackRes = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+          headers: {
+            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`
+          }
+        });
+        const paystackData = await paystackRes.json();
+        
+        if (!paystackData.status || paystackData.data.status !== "success") {
+          return NextResponse.json({ error: "Payment verification failed", details: "Transaction was not successful on Paystack." }, { status: 400 });
+        }
+        
+        // Paystack amount is in kobo (base amount * 100)
+        const expectedAmountKobo = Math.round(calculatedTotal * 100);
+        if (paystackData.data.amount < expectedAmountKobo) {
+          return NextResponse.json({ error: "Payment verification failed", details: "Amount paid is less than the calculated order total." }, { status: 400 });
+        }
+      } catch (paystackError) {
+        console.error("Paystack verification error:", paystackError);
+        return NextResponse.json({ error: "Payment verification failed", details: "Could not reach Paystack to verify transaction." }, { status: 500 });
+      }
+    } else {
+      console.warn("WARNING: PAYSTACK_SECRET_KEY is not set. Skipping server-side payment verification. Do not do this in production!");
+    }
+
     // Create the order in the database
     const order = await prisma.order.create({
       data: {
@@ -36,12 +81,12 @@ export async function POST(req: Request) {
         customerName: name,
         phoneNumber: phone,
         deliveryAddress: address,
-        totalAmount: total,
+        totalAmount: calculatedTotal, // Use server-calculated total
         status: "PAID",
         paystackReference: reference,
         items: {
-          create: items.map((item: any) => ({
-            productId: item.id,
+          create: verifiedItems.map((item: any) => ({
+            productId: item.productId,
             quantity: item.quantity,
             size: item.size,
             price: item.price
@@ -105,7 +150,7 @@ export async function POST(req: Request) {
               <tfoot>
                 <tr>
                   <td colspan="2" style="text-align: right; padding: 15px 10px; font-weight: bold;">Total Paid</td>
-                  <td style="text-align: right; padding: 15px 10px; font-weight: bold;">₦${total.toFixed(2)}</td>
+                  <td style="text-align: right; padding: 15px 10px; font-weight: bold;">₦${calculatedTotal.toFixed(2)}</td>
                 </tr>
               </tfoot>
             </table>

@@ -37,12 +37,9 @@ export default function CheckoutClient() {
           address,
           items: items.map(item => ({
             id: item.productId,
-            name: item.name,
-            price: item.price,
             quantity: item.quantity,
             size: item.size,
-          })),
-          total: cartTotal
+          }))
         })
       });
       if (!res.ok) {
