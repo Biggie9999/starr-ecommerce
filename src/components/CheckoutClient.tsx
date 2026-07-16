@@ -52,9 +52,7 @@ export default function CheckoutClient() {
         return;
       }
       
-      const result = await res.json();
-      // Temporary debug: show email status
-      alert(`Order saved! Email status: ${result.emailStatus}${result.emailError ? ' - Error: ' + JSON.stringify(result.emailError) : ''}`);
+      clearCart();
       
       clearCart();
       router.push("/success");
