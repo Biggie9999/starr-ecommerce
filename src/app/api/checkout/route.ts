@@ -188,7 +188,7 @@ export async function POST(req: Request) {
               <tfoot>
                 <tr>
                   <td colspan="2" style="text-align: right; padding: 15px 10px; font-weight: bold;">Total Paid</td>
-                  <td style="text-align: right; padding: 15px 10px; font-weight: bold;">₦${total.toFixed(2)}</td>
+                  <td style="text-align: right; padding: 15px 10px; font-weight: bold;">₦${calculatedTotal.toFixed(2)}</td>
                 </tr>
               </tfoot>
             </table>
