@@ -124,6 +124,7 @@ export default function Footer() {
         fontSize: '0.875rem'
       }}>
         <p>&copy; {new Date().getFullYear()} Starr Premium. All rights reserved.</p>
+        <p style={{ fontWeight: 500, color: '#f9fafb' }}>Contact: textstar01@gmail.com</p>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           <Link href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Privacy Policy</Link>
           <Link href="#" style={{ color: '#9ca3af', textDecoration: 'none' }}>Terms of Service</Link>
