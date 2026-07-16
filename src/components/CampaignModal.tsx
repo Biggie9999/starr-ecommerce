@@ -28,13 +28,23 @@ export default function CampaignModal() {
     if (!email) return;
     
     setStatus("loading");
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/subscribers', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      
+      if (!res.ok) throw new Error("Subscription failed");
+      
       setStatus("success");
       setTimeout(() => {
         closeModal();
       }, 2000);
-    }, 1000);
+    } catch (error) {
+      console.error(error);
+      setStatus("idle");
+    }
   };
 
   if (!isOpen) return null;

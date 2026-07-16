@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { usePaystackPayment } from "react-paystack";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/context/ToastContext";
 
 export default function CheckoutClient() {
   const { items, cartTotal, clearCart } = useCart();
+  const { addToast } = useToast();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -45,17 +47,17 @@ export default function CheckoutClient() {
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
         console.error("Failed to save order to DB", errData);
-        alert(`Database Error: ${errData.details || 'Unknown error'}`);
+        addToast(`Database Error: ${errData.details || 'Unknown error'}`);
         return;
       }
       
+      addToast("Order placed successfully!");
       clearCart();
       
-      clearCart();
       router.push("/success");
     } catch (e: any) {
       console.error(e);
-      alert(`Network error: ${e?.message || 'Unknown'}`);
+      addToast(`Network error: ${e?.message || 'Unknown'}`);
     } finally {
       setIsProcessing(false);
     }
