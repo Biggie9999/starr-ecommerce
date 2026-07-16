@@ -23,7 +23,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
     if (status === "SHIPPED" && process.env.RESEND_API_KEY && order.customerEmail) {
       try {
         const resend = new Resend(process.env.RESEND_API_KEY);
-        const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+        const senderEmail = process.env.SENDER_EMAIL || "orders@star01.xyz";
 
         const itemsListHtml = order.items.map((item: any) => `
           <tr>

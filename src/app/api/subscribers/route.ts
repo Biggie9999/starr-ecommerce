@@ -39,7 +39,7 @@ export async function POST(req: Request) {
         `;
 
         await resend.emails.send({
-          from: "Starr Notifications <onboarding@resend.dev>",
+          from: "Starr Notifications <notifications@star01.xyz>",
           to: "olusojiteniola26@gmail.com",
           subject: "New Newsletter Subscriber - STARR",
           html: emailHtml,

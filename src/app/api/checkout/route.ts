@@ -61,7 +61,7 @@ export async function POST(req: Request) {
     if (process.env.RESEND_API_KEY) {
       try {
         const resend = new Resend(process.env.RESEND_API_KEY);
-        const senderEmail = process.env.SENDER_EMAIL || "onboarding@resend.dev";
+        const senderEmail = process.env.SENDER_EMAIL || "orders@star01.xyz";
         const adminEmail = "olusojiteniola26@gmail.com";
         
         const itemsListHtml = order.items.map((item: any) => `
