@@ -15,7 +15,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
     orderBy: { createdAt: 'desc' }
   });
 
-  const categories = ["All", "Tees", "Hoodies", "Accessories"];
+  const categories = ["All", "Jeans", "Jorts", "Hoodies", "Tees"];
 
   return (
     <div>

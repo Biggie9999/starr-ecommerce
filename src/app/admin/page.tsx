@@ -257,7 +257,8 @@ export default function AdminDashboard() {
               <select className="input-field" value={category} onChange={e => setCategory(e.target.value)} required style={{ width: '100%' }}>
                 <option value="Tees">Tees</option>
                 <option value="Hoodies">Hoodies</option>
-                <option value="Accessories">Accessories</option>
+                <option value="Jeans">Jeans</option>
+                <option value="Jorts">Jorts</option>
               </select>
             </div>
             

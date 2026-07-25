@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin to Win - Premium Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Spin & Win</h1>
+            <p>Are you feeling lucky today?</p>
+        </header>
+
+        <main>
+            <div class="wheel-container">
+                <canvas id="wheel" width="500" height="500"></canvas>
+                <div class="pointer"></div>
+            </div>
+            
+            <div class="controls">
+                <button id="spin-btn">SPIN NOW</button>
+            </div>
+        </main>
+
+        <div id="result-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Congratulations!</h2>
+                <p id="prize-text">You won nothing yet.</p>
+                <button id="close-modal-btn">Awesome!</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
