@@ -431,3 +431,37 @@ a {
 
 .slider-btn.prev { left: 1rem; }
 .slider-btn.next { right: 1rem; }
+
+/* Custom Motion Graphics */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-glow {
+  0% { filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.1)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 25px rgba(220, 38, 38, 0.6)); transform: scale(1.02); }
+  100% { filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.1)); transform: scale(1); }
+}
+
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.3s; }
+.delay-2 { animation-delay: 0.6s; }
