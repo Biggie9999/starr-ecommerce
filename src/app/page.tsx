@@ -44,7 +44,7 @@ export default function Home() {
       )}
 
       <img 
-        src="/store-closed-bg.jpg" 
+        src="/store-closed-bg-transparent.png" 
         alt="Starr Premium" 
         className="animate-glow"
         style={{ 
@@ -52,10 +52,7 @@ export default function Home() {
           width: '100%', 
           marginBottom: '3rem',
           position: 'relative',
-          zIndex: 10,
-          borderRadius: '2rem',
-          padding: '1rem',
-          backgroundColor: '#ffffff'
+          zIndex: 10
         }} 
       />
       
