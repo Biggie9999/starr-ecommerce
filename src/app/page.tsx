@@ -65,7 +65,7 @@ export default function Home() {
           lineHeight: 1,
           marginBottom: '1rem',
           textTransform: 'uppercase',
-          color: '#ffffff',
+          color: '#dc2626',
           position: 'relative',
           zIndex: 10
         }}
