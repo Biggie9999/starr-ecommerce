@@ -25,7 +25,8 @@ export default function Home() {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: '#ffffff',
+      backgroundColor: '#000000',
+      backgroundImage: 'radial-gradient(circle at 50% 0%, #1a0000 0%, #000000 70%)',
       fontFamily: 'var(--font-outfit), sans-serif',
       textAlign: 'center',
       padding: '2rem',
@@ -35,10 +36,10 @@ export default function Home() {
         <Confetti 
           width={windowDimension.width} 
           height={windowDimension.height} 
-          colors={['#dc2626', '#000000', '#ffffff']} 
+          colors={['#ffffff', '#facc15', '#dc2626']} 
           recycle={true}
-          numberOfPieces={150}
-          gravity={0.05}
+          numberOfPieces={100}
+          gravity={0.03}
         />
       )}
 
@@ -47,11 +48,14 @@ export default function Home() {
         alt="Starr Premium" 
         className="animate-glow"
         style={{ 
-          maxWidth: '600px', 
+          maxWidth: '500px', 
           width: '100%', 
           marginBottom: '3rem',
           position: 'relative',
-          zIndex: 10
+          zIndex: 10,
+          borderRadius: '2rem',
+          padding: '1rem',
+          backgroundColor: '#ffffff'
         }} 
       />
       
@@ -64,7 +68,7 @@ export default function Home() {
           lineHeight: 1,
           marginBottom: '1rem',
           textTransform: 'uppercase',
-          color: '#000000',
+          color: '#ffffff',
           position: 'relative',
           zIndex: 10
         }}
