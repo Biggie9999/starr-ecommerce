@@ -536,7 +536,25 @@ a {
 }
 
 /* Slow background zoom */
-@keyframes bg-zoom {
-  0% { background-size: 100%; }
-  100% { background-size: 115%; }
+@keyframes galaxy-zoom {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.2) rotate(2deg); }
+}
+
+/* Shooting Star */
+@keyframes shoot {
+  0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translateX(600px) translateY(600px) rotate(-45deg); opacity: 0; }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8), white);
+  border-radius: 9999px;
+  animation: shoot linear infinite;
+  pointer-events: none;
+  z-index: 3;
 }

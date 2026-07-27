@@ -27,11 +27,23 @@ function generateParticles(count: number) {
   }));
 }
 
+// Generates shooting stars
+function generateShootingStars(count: number) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    top: `${Math.random() * 60}%`,
+    left: `${Math.random() * 60}%`,
+    delay: `${Math.random() * 12}s`,
+    duration: `${Math.random() * 2 + 2}s`,
+  }));
+}
+
 export default function Home() {
   const [windowDimension, setWindowDimension] = useState({ width: 0, height: 0 });
   const [isClient, setIsClient] = useState(false);
   const stars = useRef(generateStars(80));
   const particles = useRef(generateParticles(25));
+  const shootingStars = useRef(generateShootingStars(6));
 
   useEffect(() => {
     setIsClient(true);
@@ -51,15 +63,23 @@ export default function Home() {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      background: 'url(/dark-space.png) center/cover no-repeat',
       backgroundColor: '#000000',
       fontFamily: 'var(--font-outfit), sans-serif',
       textAlign: 'center',
       padding: '2rem',
       overflow: 'hidden',
-      position: 'relative',
-      animation: 'bg-zoom 30s ease-in-out infinite alternate'
+      position: 'relative'
     }}>
+      {/* Animated galaxy background */}
+      <div style={{
+        position: 'absolute',
+        inset: '-10%',
+        backgroundImage: 'url(/dark-space.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        animation: 'galaxy-zoom 20s ease-in-out infinite alternate',
+        zIndex: 0
+      }} />
 
       {/* Marquee at top */}
       <div className="marquee-container">
@@ -97,6 +117,20 @@ export default function Home() {
             opacity: p.opacity,
             animationDelay: p.delay,
             animationDuration: p.duration,
+          }}
+        />
+      ))}
+
+      {/* Shooting stars */}
+      {isClient && shootingStars.current.map(s => (
+        <div
+          key={s.id}
+          className="shooting-star"
+          style={{
+            top: s.top,
+            left: s.left,
+            animationDelay: s.delay,
+            animationDuration: s.duration,
           }}
         />
       ))}
