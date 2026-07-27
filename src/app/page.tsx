@@ -30,8 +30,15 @@ export default function Home() {
       fontFamily: 'var(--font-outfit), sans-serif',
       textAlign: 'center',
       padding: '2rem',
-      overflow: 'hidden'
+      overflow: 'hidden',
+      position: 'relative'
     }}>
+      <div className="marquee-container">
+        <div className="marquee-content">
+          <span style={{ paddingRight: '2rem' }}>STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • </span>
+          <span style={{ paddingRight: '2rem' }}>STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • </span>
+        </div>
+      </div>
       {isClient && (
         <Confetti 
           width={windowDimension.width} 
