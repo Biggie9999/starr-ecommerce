@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Confetti from "react-confetti";
+
 
 // Generates a list of star objects once
 function generateStars(count: number) {
@@ -68,18 +68,6 @@ export default function Home() {
           <span style={{ paddingRight: '2rem' }}>STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • STARR IS COMING • </span>
         </div>
       </div>
-
-      {/* Confetti */}
-      {isClient && (
-        <Confetti
-          width={windowDimension.width}
-          height={windowDimension.height}
-          colors={['#ffffff', '#facc15', '#dc2626']}
-          recycle={true}
-          numberOfPieces={100}
-          gravity={0.03}
-        />
-      )}
 
       {/* Twinkling stars layer */}
       {isClient && stars.current.map(star => (
