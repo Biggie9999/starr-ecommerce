@@ -466,6 +466,20 @@ a {
 .delay-1 { animation-delay: 0.3s; }
 .delay-2 { animation-delay: 0.6s; }
 
+/* Cursor blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+  color: #dc2626;
+  font-weight: 300;
+  margin-left: 2px;
+}
+
 /* Marquee */
 @keyframes marquee-ltr {
   0% { transform: translateX(-50%); }
@@ -539,22 +553,4 @@ a {
 @keyframes galaxy-zoom {
   0% { transform: scale(1) rotate(0deg); }
   100% { transform: scale(1.2) rotate(2deg); }
-}
-
-/* Shooting Star */
-@keyframes shoot {
-  0% { transform: translateX(0) translateY(0) rotate(-45deg); opacity: 1; }
-  70% { opacity: 1; }
-  100% { transform: translateX(600px) translateY(600px) rotate(-45deg); opacity: 0; }
-}
-
-.shooting-star {
-  position: absolute;
-  width: 150px;
-  height: 2px;
-  background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8), white);
-  border-radius: 9999px;
-  animation: shoot linear infinite;
-  pointer-events: none;
-  z-index: 3;
 }

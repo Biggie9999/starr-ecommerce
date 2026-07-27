@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 
+const LAUNCH_DATE = new Date("2026-08-10T00:00:00");
+const TYPING_TEXT = "Store is closed.";
 
-// Generates a list of star objects once
 function generateStars(count: number) {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -15,7 +16,6 @@ function generateStars(count: number) {
   }));
 }
 
-// Generates floating particles
 function generateParticles(count: number) {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
@@ -27,34 +27,50 @@ function generateParticles(count: number) {
   }));
 }
 
-// Generates shooting stars
-function generateShootingStars(count: number) {
-  return Array.from({ length: count }, (_, i) => ({
-    id: i,
-    top: `${Math.random() * 60}%`,
-    left: `${Math.random() * 60}%`,
-    delay: `${Math.random() * 12}s`,
-    duration: `${Math.random() * 2 + 2}s`,
-  }));
+function useCountdown(target: Date) {
+  const calc = () => {
+    const diff = target.getTime() - Date.now();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
+    };
+  };
+  const [time, setTime] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+function useTypingEffect(text: string, speed = 80) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let i = 0;
+    setDisplayed("");
+    const id = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1));
+      i++;
+      if (i >= text.length) clearInterval(id);
+    }, speed);
+    return () => clearInterval(id);
+  }, [text, speed]);
+  return displayed;
 }
 
 export default function Home() {
-  const [windowDimension, setWindowDimension] = useState({ width: 0, height: 0 });
   const [isClient, setIsClient] = useState(false);
   const stars = useRef(generateStars(80));
   const particles = useRef(generateParticles(25));
-  const shootingStars = useRef(generateShootingStars(6));
+  const { days, hours, minutes, seconds } = useCountdown(LAUNCH_DATE);
+  const typedText = useTypingEffect(TYPING_TEXT, 80);
 
-  useEffect(() => {
-    setIsClient(true);
-    setWindowDimension({ width: window.innerWidth, height: window.innerHeight });
+  useEffect(() => { setIsClient(true); }, []);
 
-    const handleResize = () => {
-      setWindowDimension({ width: window.innerWidth, height: window.innerHeight });
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const pad = (n: number) => String(n).padStart(2, "0");
 
   return (
     <div style={{
@@ -91,48 +107,19 @@ export default function Home() {
 
       {/* Twinkling stars layer */}
       {isClient && stars.current.map(star => (
-        <div
-          key={star.id}
-          className="twinkle-star"
-          style={{
-            top: star.top,
-            left: star.left,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            animationDelay: star.delay,
-            animationDuration: star.duration,
-          }}
-        />
+        <div key={star.id} className="twinkle-star" style={{
+          top: star.top, left: star.left,
+          width: `${star.size}px`, height: `${star.size}px`,
+          animationDelay: star.delay, animationDuration: star.duration,
+        }} />
       ))}
 
       {/* Floating ember particles */}
       {isClient && particles.current.map(p => (
-        <div
-          key={p.id}
-          className="float-particle"
-          style={{
-            left: p.left,
-            width: `${p.size}px`,
-            height: `${p.size}px`,
-            opacity: p.opacity,
-            animationDelay: p.delay,
-            animationDuration: p.duration,
-          }}
-        />
-      ))}
-
-      {/* Shooting stars */}
-      {isClient && shootingStars.current.map(s => (
-        <div
-          key={s.id}
-          className="shooting-star"
-          style={{
-            top: s.top,
-            left: s.left,
-            animationDelay: s.delay,
-            animationDuration: s.duration,
-          }}
-        />
+        <div key={p.id} className="float-particle" style={{
+          left: p.left, width: `${p.size}px`, height: `${p.size}px`,
+          opacity: p.opacity, animationDelay: p.delay, animationDuration: p.duration,
+        }} />
       ))}
 
       {/* Logo */}
@@ -140,48 +127,76 @@ export default function Home() {
         src="/store-closed-bg-transparent.png"
         alt="Starr Premium"
         className="animate-glow"
-        style={{
-          maxWidth: '500px',
-          width: '100%',
-          marginBottom: '3rem',
-          position: 'relative',
-          zIndex: 10
-        }}
+        style={{ maxWidth: '420px', width: '100%', marginBottom: '2rem', position: 'relative', zIndex: 10 }}
       />
 
-      {/* Store is closed */}
-      <h1
-        className="animate-fade-up delay-1"
-        style={{
-          fontSize: 'clamp(2.5rem, 8vw, 6rem)',
-          fontWeight: 900,
-          letterSpacing: '-0.04em',
-          lineHeight: 1,
-          marginBottom: '1rem',
-          textTransform: 'uppercase',
-          color: '#dc2626',
-          position: 'relative',
-          zIndex: 10,
-          textShadow: '0 0 40px rgba(220, 38, 38, 0.6)',
-        }}
-      >
-        Store is closed.
+      {/* Typing heading */}
+      <h1 style={{
+        fontSize: 'clamp(2rem, 6vw, 5rem)',
+        fontWeight: 900,
+        letterSpacing: '-0.04em',
+        lineHeight: 1,
+        marginBottom: '2.5rem',
+        textTransform: 'uppercase',
+        color: '#dc2626',
+        position: 'relative',
+        zIndex: 10,
+        textShadow: '0 0 40px rgba(220, 38, 38, 0.6)',
+        minHeight: '1.2em',
+      }}>
+        {typedText}<span className="cursor-blink">|</span>
       </h1>
 
+      {/* Countdown */}
+      <div style={{
+        display: 'flex',
+        gap: 'clamp(1rem, 4vw, 3rem)',
+        position: 'relative',
+        zIndex: 10,
+        marginBottom: '2rem',
+      }}>
+        {[
+          { label: 'Days', value: days },
+          { label: 'Hours', value: hours },
+          { label: 'Mins', value: minutes },
+          { label: 'Secs', value: seconds },
+        ].map(({ label, value }) => (
+          <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+            <div style={{
+              fontSize: 'clamp(2.5rem, 8vw, 5rem)',
+              fontWeight: 900,
+              color: '#ffffff',
+              lineHeight: 1,
+              background: 'rgba(255,255,255,0.05)',
+              border: '1px solid rgba(220,38,38,0.4)',
+              borderRadius: '0.75rem',
+              padding: 'clamp(0.5rem, 2vw, 1rem) clamp(0.75rem, 3vw, 1.5rem)',
+              minWidth: 'clamp(60px, 12vw, 110px)',
+              textAlign: 'center',
+              backdropFilter: 'blur(10px)',
+              boxShadow: '0 0 20px rgba(220, 38, 38, 0.15)',
+              fontVariantNumeric: 'tabular-nums',
+            }}>
+              {pad(value)}
+            </div>
+            <span style={{ fontSize: '0.7rem', letterSpacing: '0.2em', color: '#9ca3af', textTransform: 'uppercase', fontWeight: 600 }}>
+              {label}
+            </span>
+          </div>
+        ))}
+      </div>
+
       {/* Coming soon */}
-      <p
-        className="animate-fade-up delay-2"
-        style={{
-          fontSize: 'clamp(1rem, 2vw, 1.5rem)',
-          letterSpacing: '0.3em',
-          textTransform: 'uppercase',
-          fontWeight: 700,
-          color: '#dc2626',
-          position: 'relative',
-          zIndex: 10,
-        }}
-      >
-        Coming soon
+      <p className="animate-fade-up delay-2" style={{
+        fontSize: 'clamp(0.875rem, 2vw, 1.25rem)',
+        letterSpacing: '0.3em',
+        textTransform: 'uppercase',
+        fontWeight: 700,
+        color: 'rgba(255,255,255,0.5)',
+        position: 'relative',
+        zIndex: 10,
+      }}>
+        Launching August 10
       </p>
     </div>
   );
