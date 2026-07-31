@@ -35,7 +35,7 @@ html, body {
 }
 
 body {
-  /* padding-top: 73px; */ /* Temporarily disabled while store is closed */
+  padding-top: 73px;
 }
 
 h1, h2, h3, h4, h5, h6 {
