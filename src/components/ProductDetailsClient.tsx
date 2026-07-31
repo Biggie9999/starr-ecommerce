@@ -209,11 +209,8 @@ export default function ProductDetailsClient({ product }: { product: any }) {
               {/* Header */}
               <div style={{ padding: '0.75rem', textAlign: 'center', backgroundColor: '#0a0a0a', borderBottom: '2px solid #eab308' }}>
                 <h2 style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#eab308', margin: 0 }}>
-                  Football Shirt Size Guide
+                  Size Guide
                 </h2>
-                <p style={{ color: '#aaa', fontSize: '0.6rem', marginTop: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                  Applies to Club & National Team Jerseys
-                </p>
               </div>
 
               {/* Features */}
@@ -250,8 +247,6 @@ export default function ProductDetailsClient({ product }: { product: any }) {
                       { s: 'L', l: '73-75', w: '57-58', h: '176-182cm', wt: '78-83kg' },
                       { s: 'XL', l: '75-78', w: '58-60', h: '182-190cm', wt: '83-90kg' },
                       { s: '2XL', l: '78-81', w: '60-62', h: '190-195cm', wt: '90-97kg' },
-                      { s: '3XL', l: '81-83', w: '62-64', h: '192-197cm', wt: '97-104kg' },
-                      { s: '4XL', l: '83-85', w: '64-65', h: '197-200cm', wt: '104-110kg' },
                     ].map((row, i) => (
                       <tr key={i} style={{ borderBottom: '1px solid #333', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
                         <td style={{ padding: '0.4rem', fontWeight: 800, color: '#eab308' }}>{row.s}</td>
