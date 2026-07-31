@@ -202,77 +202,77 @@ export default function ProductDetailsClient({ product }: { product: any }) {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
               style={{
-                backgroundColor: '#111', color: '#fff', borderRadius: '0.75rem', width: '100%', maxWidth: '550px',
+                backgroundColor: '#111', color: '#fff', borderRadius: '0.5rem', width: '100%', maxWidth: '450px',
                 overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)',
               }}
             >
               {/* Header */}
-              <div style={{ padding: '1rem', textAlign: 'center', backgroundColor: '#0a0a0a', borderBottom: '2px solid #eab308' }}>
-                <h2 style={{ fontSize: '1.25rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#eab308', margin: 0 }}>
+              <div style={{ padding: '0.75rem', textAlign: 'center', backgroundColor: '#0a0a0a', borderBottom: '2px solid #eab308' }}>
+                <h2 style={{ fontSize: '1rem', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#eab308', margin: 0 }}>
                   Football Shirt Size Guide
                 </h2>
-                <p style={{ color: '#aaa', fontSize: '0.7rem', marginTop: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                <p style={{ color: '#aaa', fontSize: '0.6rem', marginTop: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                   Applies to Club & National Team Jerseys
                 </p>
               </div>
 
               {/* Features */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem', padding: '1rem', backgroundColor: '#1a1a1a', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.25rem', padding: '0.75rem', backgroundColor: '#1a1a1a', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                 {[
-                  { icon: '🍃', text: 'Lightweight Comfort' },
-                  { icon: '💨', text: 'Breathable Fabric' },
-                  { icon: '↔️', text: 'Flexible Fit' },
-                  { icon: '🛡️', text: 'Durable Quality' },
+                  { icon: '🍃', text: 'Lightweight' },
+                  { icon: '💨', text: 'Breathable' },
+                  { icon: '↔️', text: 'Flexible' },
+                  { icon: '🛡️', text: 'Durable' },
                 ].map((f, i) => (
                   <div key={i} style={{ textAlign: 'center' }}>
-                    <div style={{ fontSize: '1.25rem', marginBottom: '0.1rem', color: '#eab308' }}>{f.icon}</div>
-                    <div style={{ fontSize: '0.65rem', fontWeight: 600, color: '#eab308', textTransform: 'uppercase' }}>{f.text}</div>
+                    <div style={{ fontSize: '1rem', marginBottom: '0.1rem', color: '#eab308' }}>{f.icon}</div>
+                    <div style={{ fontSize: '0.55rem', fontWeight: 600, color: '#eab308', textTransform: 'uppercase' }}>{f.text}</div>
                   </div>
                 ))}
               </div>
 
               {/* Table */}
-              <div style={{ padding: '1rem', overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', fontSize: '0.8rem' }}>
+              <div style={{ padding: '0.75rem', overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'center', fontSize: '0.7rem' }}>
                   <thead>
                     <tr>
-                      <th style={{ padding: '0.5rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>SIZE</th>
-                      <th style={{ padding: '0.5rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>LENGTH (CM)</th>
-                      <th style={{ padding: '0.5rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>CHEST (CM)</th>
-                      <th style={{ padding: '0.5rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>HEIGHT</th>
-                      <th style={{ padding: '0.5rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>WEIGHT</th>
+                      <th style={{ padding: '0.4rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>SIZE</th>
+                      <th style={{ padding: '0.4rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>LENGTH</th>
+                      <th style={{ padding: '0.4rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>CHEST</th>
+                      <th style={{ padding: '0.4rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>HEIGHT</th>
+                      <th style={{ padding: '0.4rem', borderBottom: '2px solid #333', color: '#eab308', fontWeight: 800 }}>WEIGHT</th>
                     </tr>
                   </thead>
                   <tbody>
                     {[
-                      { s: 'S', l: '69 - 71', w: '53 - 55', h: '162 - 170 CM', wt: '50 - 62 KG' },
-                      { s: 'M', l: '71 - 73', w: '55 - 57', h: '170 - 176 CM', wt: '62 - 78 KG' },
-                      { s: 'L', l: '73 - 75', w: '57 - 58', h: '176 - 182 CM', wt: '78 - 83 KG' },
-                      { s: 'XL', l: '75 - 78', w: '58 - 60', h: '182 - 190 CM', wt: '83 - 90 KG' },
-                      { s: '2XL', l: '78 - 81', w: '60 - 62', h: '190 - 195 CM', wt: '90 - 97 KG' },
-                      { s: '3XL', l: '81 - 83', w: '62 - 64', h: '192 - 197 CM', wt: '97 - 104 KG' },
-                      { s: '4XL', l: '83 - 85', w: '64 - 65', h: '197 - 200 CM', wt: '104 - 110 KG' },
+                      { s: 'S', l: '69-71', w: '53-55', h: '162-170cm', wt: '50-62kg' },
+                      { s: 'M', l: '71-73', w: '55-57', h: '170-176cm', wt: '62-78kg' },
+                      { s: 'L', l: '73-75', w: '57-58', h: '176-182cm', wt: '78-83kg' },
+                      { s: 'XL', l: '75-78', w: '58-60', h: '182-190cm', wt: '83-90kg' },
+                      { s: '2XL', l: '78-81', w: '60-62', h: '190-195cm', wt: '90-97kg' },
+                      { s: '3XL', l: '81-83', w: '62-64', h: '192-197cm', wt: '97-104kg' },
+                      { s: '4XL', l: '83-85', w: '64-65', h: '197-200cm', wt: '104-110kg' },
                     ].map((row, i) => (
                       <tr key={i} style={{ borderBottom: '1px solid #333', backgroundColor: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.02)' }}>
-                        <td style={{ padding: '0.5rem', fontWeight: 800, color: '#eab308' }}>{row.s}</td>
-                        <td style={{ padding: '0.5rem', color: '#ddd' }}>{row.l}</td>
-                        <td style={{ padding: '0.5rem', color: '#ddd' }}>{row.w}</td>
-                        <td style={{ padding: '0.5rem', color: '#ddd' }}>{row.h}</td>
-                        <td style={{ padding: '0.5rem', color: '#ddd' }}>{row.wt}</td>
+                        <td style={{ padding: '0.4rem', fontWeight: 800, color: '#eab308' }}>{row.s}</td>
+                        <td style={{ padding: '0.4rem', color: '#ddd' }}>{row.l}</td>
+                        <td style={{ padding: '0.4rem', color: '#ddd' }}>{row.w}</td>
+                        <td style={{ padding: '0.4rem', color: '#ddd' }}>{row.h}</td>
+                        <td style={{ padding: '0.4rem', color: '#ddd' }}>{row.wt}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
 
                 {/* Footer notes */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid #333' }}>
-                  <div style={{ fontSize: '0.65rem', color: '#999', flex: 1 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', paddingTop: '0.75rem', borderTop: '1px solid #333' }}>
+                  <div style={{ fontSize: '0.55rem', color: '#999', flex: 1 }}>
                     <strong style={{ color: '#eab308' }}>PLEASE NOTE:</strong><br />
                     Measurements may vary by 1-3 cm.<br />
                     If you are between sizes, choose the larger size.
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.65rem', color: '#aaa', borderLeft: '1px solid #333', paddingLeft: '1rem' }}>
-                    <div style={{ padding: '0.25rem', border: '1px solid #555', borderRadius: '4px' }}>30°</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.55rem', color: '#aaa', borderLeft: '1px solid #333', paddingLeft: '0.75rem' }}>
+                    <div style={{ padding: '0.2rem', border: '1px solid #555', borderRadius: '4px' }}>30°</div>
                     <div>
                       MACHINE WASH COLD<br/>
                       HANG DRY
@@ -282,7 +282,7 @@ export default function ProductDetailsClient({ product }: { product: any }) {
 
                 <button 
                   onClick={() => setIsSizeGuideOpen(false)}
-                  style={{ width: '100%', marginTop: '1.5rem', padding: '0.75rem', backgroundColor: '#eab308', color: '#000', border: 'none', borderRadius: '0.5rem', fontWeight: 800, textTransform: 'uppercase', cursor: 'pointer', fontSize: '0.875rem' }}
+                  style={{ width: '100%', marginTop: '1rem', padding: '0.5rem', backgroundColor: '#eab308', color: '#000', border: 'none', borderRadius: '0.5rem', fontWeight: 800, textTransform: 'uppercase', cursor: 'pointer', fontSize: '0.75rem' }}
                 >
                   Close Size Guide
                 </button>
