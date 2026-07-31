@@ -6,6 +6,26 @@ import { usePaystackPayment } from "react-paystack";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/context/ToastContext";
 
+const NIGERIAN_STATES = [
+  "Abia", "Abuja (FCT)", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", 
+  "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", "Kaduna", 
+  "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo", "Osun", 
+  "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
+];
+
+const NORTHERN_STATES = [
+  "Adamawa", "Bauchi", "Benue", "Borno", "Gombe", "Jigawa", 
+  "Kaduna", "Katsina", "Kebbi", "Kogi", "Nasarawa", "Niger", 
+  "Plateau", "Sokoto", "Taraba", "Yobe", "Zamfara"
+];
+
+function getDeliveryFee(state: string) {
+  if (!state) return 0;
+  if (state === "Kwara") return 3000;
+  if (NORTHERN_STATES.includes(state)) return 8000;
+  return 5000;
+}
+
 export default function CheckoutClient() {
   const { items, cartTotal, clearCart } = useCart();
   const { addToast } = useToast();
@@ -13,13 +33,17 @@ export default function CheckoutClient() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [deliveryState, setDeliveryState] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const router = useRouter();
+
+  const deliveryFee = getDeliveryFee(deliveryState);
+  const finalTotal = cartTotal + deliveryFee;
 
   const config = {
     reference: (new Date()).getTime().toString(),
     email: email,
-    amount: cartTotal * 100, // Paystack amount is in kobo (base currency * 100)
+    amount: finalTotal * 100, // Paystack amount is in kobo (base currency * 100)
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || "pk_live_487bcd15b31ec3a647f35535581b8f52e34c05b1",
   };
 
@@ -37,6 +61,7 @@ export default function CheckoutClient() {
           email,
           phone,
           address,
+          state: deliveryState,
           items: items.map(item => ({
             id: item.productId,
             quantity: item.quantity,
@@ -70,7 +95,10 @@ export default function CheckoutClient() {
 
   const handleCheckout = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !name || !phone || !address) return;
+    if (!email || !name || !phone || !address || !deliveryState) {
+      addToast("Please fill in all fields including State");
+      return;
+    }
     initializePayment({ onSuccess, onClose });
   };
 
@@ -119,6 +147,21 @@ export default function CheckoutClient() {
             />
           </div>
           <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>State</label>
+            <select 
+              className="input-field" 
+              value={deliveryState} 
+              onChange={e => setDeliveryState(e.target.value)} 
+              required
+              style={{ backgroundColor: 'var(--background)' }}
+            >
+              <option value="" disabled>Select a state</option>
+              {NIGERIAN_STATES.map(st => (
+                <option key={st} value={st}>{st}</option>
+              ))}
+            </select>
+          </div>
+          <div>
             <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Delivery Address</label>
             <textarea 
               className="input-field" 
@@ -129,7 +172,7 @@ export default function CheckoutClient() {
             />
           </div>
           <button type="submit" className="btn btn-primary" disabled={isProcessing} style={{ padding: '1rem', fontSize: '1.125rem', marginTop: '1rem' }}>
-            {isProcessing ? 'Processing Order...' : `Pay ₦${cartTotal.toFixed(2)} with Paystack`}
+            {isProcessing ? 'Processing Order...' : `Pay ₦${finalTotal.toFixed(2)} with Paystack`}
           </button>
         </form>
       </div>
@@ -148,9 +191,17 @@ export default function CheckoutClient() {
               </div>
             ))}
           </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 700 }}>
-            <span>Total</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1rem', marginBottom: '1rem', color: 'var(--text-muted)' }}>
+            <span>Items Subtotal</span>
             <span>₦{cartTotal.toFixed(2)}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1rem', marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
+            <span>Delivery Fee ({deliveryState || 'Select State'})</span>
+            <span>₦{deliveryFee.toFixed(2)}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 700, borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+            <span>Total</span>
+            <span>₦{finalTotal.toFixed(2)}</span>
           </div>
         </div>
       </div>

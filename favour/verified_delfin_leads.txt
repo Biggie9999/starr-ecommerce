@@ -1,0 +1,16 @@
+Email Verification Results (Syntax & Domain MX Check):
+==================================================
+info@higashimoto.co.jp -> Verified Legit (MX records found)
+chris@foodautomation.com.au -> Verified Legit (MX records found)
+mytsak@matimex-s.com.ua -> Verified Legit (MX records found)
+office@emerson-technik.eu -> Verified Legit (MX records found)
+dan@dpecfoodsolutions.ca -> Verified Legit (MX records found)
+info@efis.lt -> Verified Legit (MX records found)
+depcomercial@ecia.pt -> Verified Legit (MX records found)
+mika.iskala@fi.multivac.com -> Verified Legit (MX records found)
+nick@ftiinc.org -> Verified Legit (MX records found)
+jg@bimconcepts.nl -> Verified Legit (MX records found)
+sales@lsengineering.co.uk -> Verified Legit (MX records found)
+uzi.y@y-smadar.co.il -> Verified Legit (MX records found)
+stefan.karlsson@multivac.se -> Verified Legit (MX records found)
+sales@boonsfis.com -> Verified Legit (MX records found)

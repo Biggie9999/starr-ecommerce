@@ -5,7 +5,7 @@ import { Resend } from "resend";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { reference, name, email, phone, address, items, total } = body;
+    const { reference, name, email, phone, address, state, items } = body;
 
     if (!email || !items || items.length === 0) {
       return NextResponse.json({ error: "Invalid order data" }, { status: 400 });
@@ -47,6 +47,24 @@ export async function POST(req: Request) {
       };
     });
 
+    const NORTHERN_STATES = [
+      "Adamawa", "Bauchi", "Benue", "Borno", "Gombe", "Jigawa", 
+      "Kaduna", "Katsina", "Kebbi", "Kogi", "Nasarawa", "Niger", 
+      "Plateau", "Sokoto", "Taraba", "Yobe", "Zamfara"
+    ];
+
+    let calculatedDeliveryFee = 5000;
+    if (state === "Kwara") {
+      calculatedDeliveryFee = 3000;
+    } else if (NORTHERN_STATES.includes(state)) {
+      calculatedDeliveryFee = 8000;
+    } else if (!state) {
+      calculatedDeliveryFee = 0; // Fallback just in case
+    }
+    
+    const itemsSubtotal = calculatedTotal;
+    calculatedTotal += calculatedDeliveryFee;
+
     // Verify payment with Paystack
     if (process.env.PAYSTACK_SECRET_KEY) {
       try {
@@ -75,12 +93,14 @@ export async function POST(req: Request) {
     }
 
     // Create the order in the database
+    const fullDeliveryAddress = state ? `${address}\nState: ${state}` : address;
+    
     const order = await prisma.order.create({
       data: {
         customerEmail: email,
         customerName: name,
         phoneNumber: phone,
-        deliveryAddress: address,
+        deliveryAddress: fullDeliveryAddress,
         totalAmount: calculatedTotal, // Use server-calculated total
         status: "PAID",
         paystackReference: reference,
@@ -120,7 +140,7 @@ export async function POST(req: Request) {
           </tr>
         `).join('');
 
-        const safeAddress = address ? String(address).replace(/\n/g, '<br/>') : 'N/A';
+        const safeAddress = fullDeliveryAddress ? String(fullDeliveryAddress).replace(/\n/g, '<br/>') : 'N/A';
 
         // --- EMAIL 1: Admin Notification ---
         const adminEmailHtml = `
@@ -148,6 +168,14 @@ export async function POST(req: Request) {
               </thead>
               <tbody>${itemsListHtml}</tbody>
               <tfoot>
+                <tr>
+                  <td colspan="2" style="text-align: right; padding: 10px; font-weight: 500; color: #666;">Items Subtotal</td>
+                  <td style="text-align: right; padding: 10px; font-weight: 500; color: #666;">₦${itemsSubtotal.toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: right; padding: 10px; font-weight: 500; color: #666; border-bottom: 1px solid #eaeaea;">Delivery Fee (${state || 'N/A'})</td>
+                  <td style="text-align: right; padding: 10px; font-weight: 500; color: #666; border-bottom: 1px solid #eaeaea;">₦${calculatedDeliveryFee.toFixed(2)}</td>
+                </tr>
                 <tr>
                   <td colspan="2" style="text-align: right; padding: 15px 10px; font-weight: bold;">Total Paid</td>
                   <td style="text-align: right; padding: 15px 10px; font-weight: bold;">₦${calculatedTotal.toFixed(2)}</td>
@@ -186,6 +214,14 @@ export async function POST(req: Request) {
               </thead>
               <tbody>${itemsListHtml}</tbody>
               <tfoot>
+                <tr>
+                  <td colspan="2" style="text-align: right; padding: 10px; font-weight: 500; color: #666;">Items Subtotal</td>
+                  <td style="text-align: right; padding: 10px; font-weight: 500; color: #666;">₦${itemsSubtotal.toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: right; padding: 10px; font-weight: 500; color: #666; border-bottom: 1px solid #eaeaea;">Delivery Fee (${state || 'N/A'})</td>
+                  <td style="text-align: right; padding: 10px; font-weight: 500; color: #666; border-bottom: 1px solid #eaeaea;">₦${calculatedDeliveryFee.toFixed(2)}</td>
+                </tr>
                 <tr>
                   <td colspan="2" style="text-align: right; padding: 15px 10px; font-weight: bold;">Total Paid</td>
                   <td style="text-align: right; padding: 15px 10px; font-weight: bold;">₦${calculatedTotal.toFixed(2)}</td>
