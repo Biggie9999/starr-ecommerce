@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --background: transparent;
-  --foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #000000;
   --primary: #dc2626; /* Stark Red */
-  --primary-hover: #ffffff;
-  --surface: rgba(255, 255, 255, 0.05);
-  --border: rgba(255, 255, 255, 0.1);
-  --text: #ffffff;
-  --text-muted: #9ca3af;
+  --primary-hover: #000000;
+  --surface: #f9fafb;
+  --border: #e5e7eb;
+  --text: #000000;
+  --text-muted: #6b7280;
   --success: #10B981;
   
   --font-outfit: 'Outfit', sans-serif;
@@ -23,11 +23,7 @@
 html, body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: #000000;
-  background-image: url('/dark-space.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-outfit);
   line-height: 1.5;
