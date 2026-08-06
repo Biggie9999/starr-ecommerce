@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
-import { CartProvider } from "@/context/CartContext";
-import { ToastProvider } from "@/context/ToastContext";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -10,9 +8,15 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Starr - Store Closed",
-  description: "Store is closed. Coming soon.",
+  title: "Starr - Premium E-commerce",
+  description: "Exclusive clothes and pieces.",
 };
+
+import { CartProvider } from "@/context/CartContext";
+import { ToastProvider } from "@/context/ToastContext";
+import Navbar from "@/components/Navbar";
+import CartDrawer from "@/components/CartDrawer";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -24,12 +28,15 @@ export default function RootLayout({
       lang="en"
       className={`${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-black text-white">
+      <body className="min-h-full flex flex-col font-sans">
         <ToastProvider>
           <CartProvider>
+            <Navbar />
             <main style={{ flex: 1 }}>
               {children}
             </main>
+            <CartDrawer />
+            <Footer />
           </CartProvider>
         </ToastProvider>
       </body>
