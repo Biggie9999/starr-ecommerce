@@ -21,7 +21,7 @@ const NORTHERN_STATES = [
 
 function getDeliveryFee(state: string) {
   if (!state) return 0;
-  if (state === "Test") return 50;
+  if (state === "Test") return 100;
   if (state === "Kwara") return 3000;
   if (NORTHERN_STATES.includes(state)) return 8000;
   return 5000;

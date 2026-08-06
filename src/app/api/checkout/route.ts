@@ -55,7 +55,7 @@ export async function POST(req: Request) {
 
     let calculatedDeliveryFee = 5000;
     if (state === "Test") {
-      calculatedDeliveryFee = 50;
+      calculatedDeliveryFee = 100;
     } else if (state === "Kwara") {
       calculatedDeliveryFee = 3000;
     } else if (NORTHERN_STATES.includes(state)) {
