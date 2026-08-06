@@ -67,8 +67,7 @@ export async function POST(req: Request) {
         
         // Calculate delivery fee logic again for email (simplified)
         let calculatedDeliveryFee = 5000;
-        if (state === "Test") calculatedDeliveryFee = 100;
-        else if (state === "Kwara") calculatedDeliveryFee = 3000;
+        if (state === "Kwara") calculatedDeliveryFee = 3000;
         else if (["Adamawa", "Bauchi", "Benue", "Borno", "Gombe", "Jigawa", "Kaduna", "Katsina", "Kebbi", "Kogi", "Nasarawa", "Niger", "Plateau", "Sokoto", "Taraba", "Yobe", "Zamfara"].includes(state)) calculatedDeliveryFee = 8000;
         else if (state === "N/A") calculatedDeliveryFee = 0;
 
