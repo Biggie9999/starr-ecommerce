@@ -1,0 +1,67 @@
+import math
+
+companies = [
+"Becker Canada (info@becker-canada.com)",
+"Becker UK Ltd (sales@becker.co.uk)",
+"HVH Industrial Solutions (sales@hvhindustrial.com)",
+"Protech International (sales@protech-international.com)",
+"Vakuum Bohemia (info@vakuum-bohemia.cz)",
+"Greenpeg Ltd (sales@greenpegltd.com)",
+"Total Maintenance Solutions (TMS Vacuum) (sales@tmsvacuum.com)",
+"Cisco Air Systems (info@ciscoair.com)",
+"Blake & Pendleton (sales@blakeandpendleton.com)",
+"Fluid Flow Products (sales@fluidflow.com)",
+"Directair (info@directair.co.uk)",
+"Air Supply Ltd (info@airsupply.co.uk)",
+"Pattons Inc. (info@pattonsinc.com)",
+"Dearing Compressor & Pump Co. (sales@dearingcomp.com)",
+"Northwest Pump & Equipment (info@nwpump.com)",
+"Tri-State Vacuum & Pump (sales@tristatevac.com)",
+"Vacuum Pump Services Ltd (info@vacuumpumpservices.co.uk)",
+"Air Power Products (sales@airpowerproducts.ca)",
+"Busch Vacuum Solutions USA Headquarters (info@buschusa.com)",
+"Busch Vacuum Solutions Canada (info@busch.ca)",
+"Busch Vacuum Solutions UK (sales@busch.co.uk)",
+"Busch Vacuum Solutions Germany (info@busch.de)",
+"Busch Vacuum Solutions Australia (sales@busch.com.au)",
+"Busch Vacuum Solutions South Africa & West Africa (info@busch.co.za)",
+"Braas Company (FLSales@Braasco.com)",
+"Acorn Cleaning Equipment (info@acornonline.co.uk)",
+"A1 Pressure Washers (Info@A1pressurewashers.com)",
+"R&S Industrial Cleaning Equipment (info@rsindustrialcleaning.co.uk)",
+"Able Cleaning Equipment (info@ablecleaningequipment.co.uk)",
+"Mark Douglas Industrial Supplies Ltd (sales@mark-douglas.co.uk)",
+"Alpha Power Cleaners (sales@alphapower.co.uk)",
+"Clean Machines (sales@cleanmachines.ie)",
+"Clean-Quip (info@clean-quip.ie)",
+"CHBIB Care (sales@chbibcare.com)",
+"Perfect Solutions (sales@perfectsolutionsltd.ie)",
+"Onys (sales@onys.ca)",
+"Morrison Industrial Equipment (sales@morrison-ind.com)",
+"Forklifts of Minnesota (sales@forkliftsofmn.com)",
+"Caliber Equipment (sales@caliberequipment.com)",
+"Magnum Pressure Washers (sales@magnumpressurewashers.com)",
+"Janitorial Equipment Supply (sales@janitorialequipmentsupply.com)",
+"SweepScrub (sales@sweepscrub.com)",
+"Pressure Washer Supply (sales@pressurewashersupply.com)",
+"Nilfisk Shop NL (sales@nilfisk-shop.nl)",
+"Gebr. Becker GmbH Global Headquarters (info@becker-international.com)",
+"Becker Vacuum Pumps Canada Inc. (info@becker-canada.com)",
+"Becker Mexico (info@becker-mexico.mx)",
+"Becker France (info@becker-france.fr)",
+"Becker Italia (info@becker-italia.it)",
+"Becker Ibérica (info@becker-iberica.com)",
+"Becker Nederland (info@becker-nederland.nl)",
+"Becker AG Switzerland (info@becker-ag.ch)",
+"Gebr. Becker India (info@becker-india.com)",
+"Becker Asia Pacific (info@becker-asiapacific.com)",
+"Birchley Supplies (sales@birchleysupplies.co.uk)",
+"Cleantec Equipment Ltd (info@cleantec.biz)"
+]
+
+chunk_size = math.ceil(len(companies)/4)
+for i in range(4):
+    with open(f'companies_chunk_{i+1}.txt', 'w') as f:
+        f.write("\n".join(companies[i*chunk_size:(i+1)*chunk_size]))
+
+print("Split into 4 chunks")

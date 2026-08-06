@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { sendOrderEmails } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { reference, name, email, phone, address, state, items } = body;
+    const { name, email, phone, address, state, items } = body;
 
     if (!email || !items || items.length === 0) {
       return NextResponse.json({ error: "Invalid order data" }, { status: 400 });
@@ -21,11 +20,9 @@ export async function POST(req: Request) {
     });
 
     if (existingProducts.length !== uniqueProductIds.length) {
-      const foundIds = existingProducts.map(p => p.id);
-      const missingIds = uniqueProductIds.filter(id => !foundIds.includes(id));
       return NextResponse.json({ 
         error: "Checkout failed", 
-        details: `The following product IDs are in your cart but missing from the database: ${missingIds.join(", ")}. Please completely empty your cart and try again.` 
+        details: "Some products in your cart are no longer available. Please empty your cart and try again." 
       }, { status: 400 });
     }
 
@@ -59,40 +56,12 @@ export async function POST(req: Request) {
     } else if (NORTHERN_STATES.includes(state)) {
       calculatedDeliveryFee = 8000;
     } else if (!state) {
-      calculatedDeliveryFee = 0; // Fallback just in case
+      calculatedDeliveryFee = 0; 
     }
     
-    const itemsSubtotal = calculatedTotal;
     calculatedTotal += calculatedDeliveryFee;
 
-    // Verify payment with Paystack
-    if (process.env.PAYSTACK_SECRET_KEY) {
-      try {
-        const paystackRes = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
-          headers: {
-            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`
-          }
-        });
-        const paystackData = await paystackRes.json();
-        
-        if (!paystackData.status || paystackData.data.status !== "success") {
-          return NextResponse.json({ error: "Payment verification failed", details: "Transaction was not successful on Paystack." }, { status: 400 });
-        }
-        
-        // Paystack amount is in kobo (base amount * 100)
-        const expectedAmountKobo = Math.round(calculatedTotal * 100);
-        if (paystackData.data.amount < expectedAmountKobo) {
-          return NextResponse.json({ error: "Payment verification failed", details: "Amount paid is less than the calculated order total." }, { status: 400 });
-        }
-      } catch (paystackError) {
-        console.error("Paystack verification error:", paystackError);
-        return NextResponse.json({ error: "Payment verification failed", details: "Could not reach Paystack to verify transaction." }, { status: 500 });
-      }
-    } else {
-      console.warn("WARNING: PAYSTACK_SECRET_KEY is not set. Skipping server-side payment verification. Do not do this in production!");
-    }
-
-    // Create the order in the database
+    // Create the order in the database with status PENDING
     const fullDeliveryAddress = state ? `${address}\nState: ${state}` : address;
     
     const order = await prisma.order.create({
@@ -101,9 +70,9 @@ export async function POST(req: Request) {
         customerName: name,
         phoneNumber: phone,
         deliveryAddress: fullDeliveryAddress,
-        totalAmount: calculatedTotal, // Use server-calculated total
-        status: "PAID",
-        paystackReference: reference,
+        totalAmount: calculatedTotal,
+        status: "PENDING", 
+        paystackReference: "CRYPTO_" + (new Date()).getTime().toString(),
         items: {
           create: verifiedItems.map((item: any) => ({
             productId: item.productId,
@@ -112,22 +81,41 @@ export async function POST(req: Request) {
             price: item.price
           }))
         }
-      },
-      include: {
-        items: {
-          include: {
-            product: { select: { name: true } }
-          }
-        }
       }
     });
 
-    // Send emails
-    await sendOrderEmails(order, calculatedTotal, calculatedDeliveryFee, state || 'N/A');
+    // Call NowPayments to create invoice
+    const nowPaymentsKey = process.env.NOWPAYMENTS_API_KEY || "G3KK8K7-9M4MXX7-GT0Y2QW-QBWDD9R";
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://star01.xyz"; 
 
-    return NextResponse.json({ success: true, orderId: order.id });
+    const invoicePayload = {
+      price_amount: calculatedTotal,
+      price_currency: "ngn", // Assuming Nigerian Naira
+      order_id: order.id,
+      order_description: "STARR E-Commerce Order",
+      success_url: `${appUrl}/success`,
+      cancel_url: `${appUrl}/`
+    };
+
+    const invoiceRes = await fetch("https://api.nowpayments.io/v1/invoice", {
+      method: "POST",
+      headers: {
+        "x-api-key": nowPaymentsKey,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(invoicePayload)
+    });
+
+    const invoiceData = await invoiceRes.json();
+
+    if (!invoiceRes.ok || !invoiceData.invoice_url) {
+      console.error("NowPayments Error:", invoiceData);
+      return NextResponse.json({ error: "Failed to generate Crypto Invoice", details: invoiceData.message || "Unknown error" }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true, invoice_url: invoiceData.invoice_url });
   } catch (error: any) {
-    console.error("Checkout error:", error);
+    console.error("Crypto Checkout error:", error);
     return NextResponse.json({ error: "Checkout failed", details: error?.message || String(error) }, { status: 500 });
   }
 }

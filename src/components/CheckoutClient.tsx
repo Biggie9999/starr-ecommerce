@@ -34,6 +34,7 @@ export default function CheckoutClient() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [deliveryState, setDeliveryState] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("paystack");
   const [isProcessing, setIsProcessing] = useState(false);
   const router = useRouter();
 
@@ -93,13 +94,52 @@ export default function CheckoutClient() {
     console.log("Payment modal closed");
   };
 
-  const handleCheckout = (e: React.FormEvent) => {
+  const handleCheckout = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !name || !phone || !address || !deliveryState) {
       addToast("Please fill in all fields including State");
       return;
     }
-    initializePayment({ onSuccess, onClose });
+    
+    if (paymentMethod === "paystack") {
+      initializePayment({ onSuccess, onClose });
+    } else {
+      // Crypto Checkout
+      try {
+        setIsProcessing(true);
+        const res = await fetch('/api/checkout-crypto', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            phone,
+            address,
+            state: deliveryState,
+            items: items.map(item => ({
+              id: item.productId,
+              quantity: item.quantity,
+              size: item.size,
+            }))
+          })
+        });
+        
+        const data = await res.json();
+        
+        if (!res.ok) {
+          addToast(`Error: ${data.details || data.error || 'Unknown error'}`);
+          setIsProcessing(false);
+          return;
+        }
+        
+        clearCart();
+        window.location.href = data.invoice_url; // Redirect to NowPayments
+      } catch (e: any) {
+        console.error(e);
+        addToast(`Network error: ${e?.message || 'Unknown'}`);
+        setIsProcessing(false);
+      }
+    }
   };
 
   if (items.length === 0) {
@@ -171,8 +211,35 @@ export default function CheckoutClient() {
               style={{ minHeight: '100px', resize: 'vertical' }}
             />
           </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--text-muted)' }}>Payment Method</label>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: '0.75rem 1rem', border: `1px solid ${paymentMethod === 'paystack' ? 'var(--primary)' : 'var(--border)'}`, borderRadius: '4px', flex: 1, backgroundColor: paymentMethod === 'paystack' ? 'rgba(220, 38, 38, 0.1)' : 'transparent' }}>
+                <input 
+                  type="radio" 
+                  name="paymentMethod" 
+                  value="paystack" 
+                  checked={paymentMethod === 'paystack'} 
+                  onChange={() => setPaymentMethod('paystack')}
+                  style={{ accentColor: 'var(--primary)' }}
+                />
+                Card / Bank
+              </label>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', padding: '0.75rem 1rem', border: `1px solid ${paymentMethod === 'crypto' ? 'var(--primary)' : 'var(--border)'}`, borderRadius: '4px', flex: 1, backgroundColor: paymentMethod === 'crypto' ? 'rgba(220, 38, 38, 0.1)' : 'transparent' }}>
+                <input 
+                  type="radio" 
+                  name="paymentMethod" 
+                  value="crypto" 
+                  checked={paymentMethod === 'crypto'} 
+                  onChange={() => setPaymentMethod('crypto')}
+                  style={{ accentColor: 'var(--primary)' }}
+                />
+                Crypto (NowPayments)
+              </label>
+            </div>
+          </div>
           <button type="submit" className="btn btn-primary" disabled={isProcessing} style={{ padding: '1rem', fontSize: '1.125rem', marginTop: '1rem' }}>
-            {isProcessing ? 'Processing Order...' : `Pay ₦${finalTotal.toFixed(2)} with Paystack`}
+            {isProcessing ? 'Processing Order...' : `Pay ₦${finalTotal.toFixed(2)} with ${paymentMethod === 'paystack' ? 'Paystack' : 'Crypto'}`}
           </button>
         </form>
       </div>
