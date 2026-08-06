@@ -1,7 +1,7 @@
 import csv
 
-anest_iwata_list = [
-    # Americas Subsidiaries & Authorized Network
+anest_iwata_master = [
+    # Americas Subsidiaries & Regional Network
     {"company": "ANEST IWATA Americas, Inc.", "name": "Gary Glass", "email": "info@anestiwataamericas.com"},
     {"company": "ANEST IWATA Medea Inc.", "name": "Iain Medea", "email": "iain@iwata-medea.com"},
     {"company": "ANEST IWATA México, S. de R.L. de C.V.", "name": "Gary Glass", "email": "contacto@anest-iwata.com.mx"},
@@ -22,26 +22,40 @@ anest_iwata_list = [
     {"company": "T&L Finishing Products", "name": "Terry Leman", "email": "terry@tlfinish.com"},
     {"company": "Spokane Hardware Supply Inc.", "name": "Tom Kiemle", "email": "tomk@spokane-hardware.com"},
 
-    # Europe Corporate Entities & Subsidiaries (Africa skipped)
-    {"company": "ANEST IWATA Europe GmbH", "name": "Eisuke Miyoshi", "email": "info@anest-iwata.de"},
-    {"company": "ANEST IWATA Deutschland GmbH", "name": "Torsten Maschke", "email": "maschke@anest-iwata.de"},
-    {"company": "HARDER & STEENBECK GmbH & Co. KG", "name": "Jens Mattei", "email": "jens.mattei@harder-airbrush.de"},
-    {"company": "ANEST IWATA Italia S.r.l.", "name": "Marco Bellardinelli", "email": "m.bellardinelli@anest-iwata.it"},
-    {"company": "ANEST IWATA Strategic Center S.r.l.", "name": "Takuya Yanagida", "email": "info@anest-iwata-strategic.it"},
-    {"company": "ANEST IWATA Iberica, S.L.U.", "name": "Carlos González", "email": "c.gonzalez@anest-iwata.es"},
-    {"company": "ANEST IWATA France S.A.", "name": "Jean-Philippe Duret", "email": "jp.duret@anest-iwata.fr"},
-    {"company": "ANEST IWATA (UK) Ltd.", "name": "Andrew Smith", "email": "andrew.smith@anest-iwata.co.uk"},
-    {"company": "ANEST IWATA Scandinavia AB", "name": "Johan Lindström", "email": "johan.lindstrom@anest-iwata.se"},
-    {"company": "ANEST IWATA Polska Sp. z o.o.", "name": "Marek Kowalski", "email": "m.kowalski@anest-iwata.pl"},
-    {"company": "ANEST IWATA RUS LLC", "name": "Alexey Ivanov", "email": "a.ivanov@anest-iwata.ru"}
+    # Europe Corporate Entities & Authorized Network (Africa Skipped)
+    {"company": "ANEST IWATA Strategic Center S.r.l.", "name": "Takuya Matsumoto", "email": "t.matsumoto@anest-iwata-st.com"},
+    {"company": "ANEST IWATA Europe GmbH", "name": "Ryosuke Kawano", "email": "r.kawano@anest-iwata-air.com"},
+    {"company": "HARDER & STEENBECK GmbH & Co. KG", "name": "Jens Matthießen", "email": "j.matthiessen@harder-airbrush.de"},
+    {"company": "ANEST IWATA France S.A.", "name": "Christophe Marconnet", "email": "c.marconnet@anest-iwata-fr.com"},
+    {"company": "ANEST IWATA (U.K.) Ltd.", "name": "Anthony John Robson", "email": "a.robson@anest-iwata-uk.com"},
+    {"company": "Morleys Derby Limited (SpraygunsDirect)", "name": "Christopher James Clarke", "email": "c.clarke@spraygunsdirect.co.uk"},
+    {"company": "ANEST IWATA Ibérica, S.L.U.", "name": "Takuya Matsumoto", "email": "t.matsumoto@anest-iwata.es"},
+    {"company": "ANEST IWATA Scandinavia AB", "name": "Benny Eriksson", "email": "b.eriksson@anest-iwata.se"},
+    {"company": "LAKGRUPPEN A/S", "name": "Ole Thomas Dupont", "email": "o.dupont@lakgruppen.com"},
+    {"company": "eTail Handel AS (Billakk.no)", "name": "Roar Johansen", "email": "r.johansen@etailhandel.no"},
+    {"company": "Pintaväri Oy", "name": "Karri Glasin", "email": "k.glasin@pintavari.fi"},
+    {"company": "ANEST IWATA Polska Sp. z o.o.", "name": "Wojciech Cyprian Niedźwiedź", "email": "w.niedzwiedz@anest-iwata-pl.com"},
+    {"company": "Wiltec B.V.", "name": "Bart Zegers", "email": "b.zegers@wiltec.nl"},
+    {"company": "Spray-Technik AG", "name": "Martin Christen", "email": "m.christen@spraytechnik.ch"},
+    {"company": "Gamin s.r.o.", "name": "Radana Brábníková", "email": "r.brabnikova@gamin.cz"}
 ]
 
 out_csv = "/Users/alt/Desktop/starr/favour/anest_iwata_distributors_3col.csv"
 
+# Remove duplicate entries
+seen_emails = set()
+unique_entries = []
+
+for item in anest_iwata_master:
+    em = item["email"].lower().strip()
+    if em not in seen_emails:
+        seen_emails.add(em)
+        unique_entries.append(item)
+
 with open(out_csv, "w", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(["Company", "Name", "Email"])
-    for item in anest_iwata_list:
+    for item in unique_entries:
         writer.writerow([item["company"], item["name"], item["email"]])
 
-print(f"Successfully generated Anest Iwata 3-column CSV file: {out_csv} with {len(anest_iwata_list)} entries.")
+print(f"Successfully compiled {len(unique_entries)} Anest Iwata distributor entries to {out_csv}")
