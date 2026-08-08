@@ -58,7 +58,7 @@ def send_campaign(csv_file, template_html_path):
         
         custom_body = f"""<p>Hello {first_name},</p>
 <p>I hope you are doing well.</p>
-<p>ANEST IWATA Americas, Inc. has a proposal for a partnership on a procurement project that I want you to attend to as soon as possible.</p>
+<p>WAGNER Group has a proposal for a partnership on a procurement project that I want you to attend to as soon as possible.</p>
 <p>A reply at your earliest convenience would be much appreciated.</p>"""
 
         # Replace the placeholder in the template with our custom body
@@ -79,8 +79,8 @@ def send_campaign(csv_file, template_html_path):
         if success:
             success_count += 1
             
-        # 4. Wait to avoid spam filters (Random delay between 20-40 seconds)
-        delay = random.randint(30, 45)
+        # 4. Wait to avoid spam filters (reduced for speed)
+        delay = random.randint(2, 4)
         print(f"Waiting {delay} seconds before next email...\n")
         time.sleep(delay)
         
@@ -88,6 +88,6 @@ def send_campaign(csv_file, template_html_path):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python3 send_anest_campaign.py leads.csv")
+        print("Usage: python3 send_wagner_campaign.py leads.csv")
     else:
-        send_campaign(sys.argv[1], "anest_email_template.html")
+        send_campaign(sys.argv[1], "wagner_email_template.html")

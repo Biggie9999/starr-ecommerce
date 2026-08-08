@@ -46,7 +46,7 @@ def send_hostinger_email(to_email, subject, body_text):
             with open(cid_file, 'rb') as img_file:
                 img_data = img_file.read()
                 # Create image with a professional branded name
-                display_name = "Gebr_Becker_GmbH_Logo.png"
+                display_name = os.path.basename(cid_file)
                 image = MIMEImage(img_data, name=display_name)
                 image.add_header('Content-ID', f'<{cid_file}>')
                 image.add_header('Content-Disposition', 'inline', filename=display_name)

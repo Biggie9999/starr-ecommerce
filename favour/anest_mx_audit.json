@@ -1,0 +1,895 @@
+{
+  "verified": [
+    {
+      "company": "Arte y Aerograf\u00eda S.A. de C.V.",
+      "name": "Leo Llerena",
+      "email": "contacto@arteyaerografia.com",
+      "domain": "arteyaerografia.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Altec Fluidos de M\u00e9xico S.A. de C.V.",
+      "name": "Executive Management Team",
+      "email": "altecfluidos1@gmail.com",
+      "domain": "gmail.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Doutor Pistola",
+      "name": "Anderson Vaz de Oliveira",
+      "email": "contato@doutorpistola.com.br",
+      "domain": "doutorpistola.com.br",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Enko SpA (Enko Chile)",
+      "name": "Roberto Konsens",
+      "email": "contacto@enko.net",
+      "domain": "enko.net",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Visos Pinturas S.A.S.",
+      "name": "Executive Management Team",
+      "email": "contacto@visospinturas.com",
+      "domain": "visospinturas.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Monumental Del Plata S.A.",
+      "name": "Ariel Marcelo Jais",
+      "email": "info@monumentaldelplata.com.ar",
+      "domain": "monumentaldelplata.com.ar",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Andy Color's E.I.R.L.",
+      "name": "Javier Glicerio Aqui\u00f1o Melgarejo",
+      "email": "ventas@andycolors.com",
+      "domain": "andycolors.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Spray Fish Inc.",
+      "name": "Steve Fish",
+      "email": "steve@sprayfishinc.com",
+      "domain": "sprayfishinc.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Global Vacuum LLC",
+      "name": "Mark Allen",
+      "email": "mallen@globalvacuumllc.com",
+      "domain": "globalvacuumllc.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Innovac Vacuum Solutions LLC",
+      "name": "Michael Davies",
+      "email": "mdavies@innovacllc.com",
+      "domain": "innovacllc.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "T&L Finishing Products",
+      "name": "Terry Leman",
+      "email": "terry@tlfinish.com",
+      "domain": "tlfinish.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Spokane Hardware Supply Inc.",
+      "name": "Tom Kiemle",
+      "email": "tomk@spokane-hardware.com",
+      "domain": "spokane-hardware.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Morleys Derby Limited (SpraygunsDirect)",
+      "name": "Christopher James Clarke",
+      "email": "c.clarke@spraygunsdirect.co.uk",
+      "domain": "spraygunsdirect.co.uk",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "LAKGRUPPEN A/S",
+      "name": "Ole Thomas Dupont",
+      "email": "o.dupont@lakgruppen.com",
+      "domain": "lakgruppen.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "eTail Handel AS (Billakk.no)",
+      "name": "Roar Johansen",
+      "email": "r.johansen@etailhandel.no",
+      "domain": "etailhandel.no",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Pintav\u00e4ri Oy",
+      "name": "Karri Glasin",
+      "email": "k.glasin@pintavari.fi",
+      "domain": "pintavari.fi",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Wiltec B.V.",
+      "name": "Bart Zegers",
+      "email": "b.zegers@wiltec.nl",
+      "domain": "wiltec.nl",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Spray-Technik AG",
+      "name": "Martin Christen",
+      "email": "m.christen@spraytechnik.ch",
+      "domain": "spraytechnik.ch",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Gamin s.r.o.",
+      "name": "Radana Br\u00e1bn\u00edkov\u00e1",
+      "email": "r.brabnikova@gamin.cz",
+      "domain": "gamin.cz",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Air Power, Inc.",
+      "name": "Dan Senff",
+      "email": "dsenff@airpower-usa.com",
+      "domain": "airpower-usa.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "OTC Industrial Technologies",
+      "name": "Adam Gibbs",
+      "email": "adam.gibbs@otcindustrial.com",
+      "domain": "otcindustrial.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "PTB Sales, Inc.",
+      "name": "Pat Blackwell",
+      "email": "pat.blackwell@ptbsales.com",
+      "domain": "ptbsales.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Spokane Hardware Supply, Inc.",
+      "name": "Andrew Northrop",
+      "email": "andrew@spokanehardware.com",
+      "domain": "spokanehardware.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Advanced Coatings Technologies",
+      "name": "Kenneth N. Withell",
+      "email": "kwithell@actcoatings.ca",
+      "domain": "actcoatings.ca",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "MC Supply & Service Co.",
+      "name": "Joe Monaldi",
+      "email": "joe@mcsupply.org",
+      "domain": "mcsupply.org",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Compressor World LLC",
+      "name": "Matt Mazanec",
+      "email": "matt@compressorworld.com",
+      "domain": "compressorworld.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Associated Compressor & Equipment LLC",
+      "name": "Jeff Banbury",
+      "email": "jbanbury@associatedcompressor.com",
+      "domain": "associatedcompressor.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Q Air-California",
+      "name": "Jimmy L. Hamilton",
+      "email": "jimh@qair.net",
+      "domain": "qair.net",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Rogers Machinery Company, Inc.",
+      "name": "Chris McKillop",
+      "email": "chris.mckillop@rogers-machinery.com",
+      "domain": "rogers-machinery.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "C.H. Reed, Inc.",
+      "name": "Bob Shields",
+      "email": "bshields@chreed.com",
+      "domain": "chreed.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Elevated Industrial Solutions",
+      "name": "Romy O'Daniel",
+      "email": "rodaniel@elevatedindustrial.com",
+      "domain": "elevatedindustrial.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "CASCO USA",
+      "name": "Jim Miller",
+      "email": "jmiller@cascousa.com",
+      "domain": "cascousa.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Air Centers of Florida",
+      "name": "John Hemken",
+      "email": "j.hemken@acfpower.com",
+      "domain": "acfpower.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Fluid-Aire Dynamics",
+      "name": "Derrick Taylor",
+      "email": "derrick.taylor@fluidairedynamics.com",
+      "domain": "fluidairedynamics.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "KG Power Systems",
+      "name": "Chris Gandolfo",
+      "email": "cgandolfo@kgpowersystems.com",
+      "domain": "kgpowersystems.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Maple Airbrush Supplies",
+      "name": "Donna Busch",
+      "email": "info@mapleairbrushsupplies.com",
+      "domain": "mapleairbrushsupplies.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Coast Airbrush",
+      "name": "David Monnig",
+      "email": "kustom@coastairbrush.com",
+      "domain": "coastairbrush.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Atlanta Compressor / Hodge Industrial",
+      "name": "Morty Hodge",
+      "email": "info@hodgeindustrial.com",
+      "domain": "hodgeindustrial.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Selectum LLC",
+      "name": "Customer Leadership Team",
+      "email": "info@selectumllc.com",
+      "domain": "selectumllc.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Pittsburgh Spray Equipment Company",
+      "name": "Patrick Harmon",
+      "email": "patrick@pittsburghsprayequip.com",
+      "domain": "pittsburghsprayequip.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Atlantic Compressors, Inc.",
+      "name": "Bill Rimer",
+      "email": "bill@atlanticcompressors.com",
+      "domain": "atlanticcompressors.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Industrial Air Centers, Inc.",
+      "name": "Dave Suder",
+      "email": "dsuder@iacserv.com",
+      "domain": "iacserv.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Brabazon Pump, Compressor & Vacuum",
+      "name": "Heath Brabazon",
+      "email": "president@brabazon.com",
+      "domain": "brabazon.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Cowart Air Compressor & Generator, Inc.",
+      "name": "Dusty Cowart",
+      "email": "cac@cowart-inc.net",
+      "domain": "cowart-inc.net",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Air Compressor & Motor Co.",
+      "name": "Lowell Jones",
+      "email": "aircomo@aircomo.com",
+      "domain": "aircomo.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "SprayGunner",
+      "name": "Artem Revunov",
+      "email": "sales@spraygunner.com",
+      "domain": "spraygunner.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Advanced Air & Vacuum Inc.",
+      "name": "Joseph James Vanderbilt Jr.",
+      "email": "joseph@aavsales.com",
+      "domain": "aavsales.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Rocha Compressed Air Specialists",
+      "name": "Joseph A. Miller",
+      "email": "joe@rochacorp.com",
+      "domain": "rochacorp.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Advanced Compressed Air Solutions, LLC",
+      "name": "Morris Lawson",
+      "email": "sales@advancedcompressedair.com",
+      "domain": "advancedcompressedair.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Airquip Systems, Inc.",
+      "name": "Grant Simpkins",
+      "email": "admin@airquipsystems.com",
+      "domain": "airquipsystems.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Texas Compression Services",
+      "name": "Robert Casey",
+      "email": "sales@texascompressionservices.com",
+      "domain": "texascompressionservices.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Air Compressor Solutions (ACS)",
+      "name": "Brian Stubbs",
+      "email": "sales@acsir.com",
+      "domain": "acsir.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Lancers, Inc.",
+      "name": "Alan Spencer",
+      "email": "lancersscrmnto@gmail.com",
+      "domain": "gmail.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "The Merri Artist",
+      "name": "Merri Sayers",
+      "email": "info@merriartist.com",
+      "domain": "merriartist.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Cascade Machinery & Electric, Inc.",
+      "name": "Michael Spring",
+      "email": "mspring@cascade-machinery.com",
+      "domain": "cascade-machinery.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Ultrimax Coatings Ltd",
+      "name": "Giles Hoare",
+      "email": "g.hoare@ultrimaxstore.com",
+      "domain": "ultrimaxstore.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "West Midlands Compressors Ltd",
+      "name": "Mikolaj Daniel Wrobel",
+      "email": "m.wrobel@wmcompressors.co.uk",
+      "domain": "wmcompressors.co.uk",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "The Airbrush Company Ltd",
+      "name": "Alexandra Medwell",
+      "email": "alex@airbrushes.com",
+      "domain": "airbrushes.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Eurospray (Ireland) Limited",
+      "name": "Jimmy Harte",
+      "email": "j.harte@eurosprayireland.com",
+      "domain": "eurosprayireland.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "ACH AUTOCOLOR Marc Becker KG",
+      "name": "Marc Becker",
+      "email": "m.becker@ach-autocolor.com",
+      "domain": "ach-autocolor.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "ALZ PLANERT (ALPA Industrievertretungen)",
+      "name": "Robin Koch",
+      "email": "r.koch@alz-planert.de",
+      "domain": "alz-planert.de",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "JEKA France",
+      "name": "Jessie Rey",
+      "email": "j.rey@jeka-france.com",
+      "domain": "jeka-france.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "AGL Marine",
+      "name": "G\u00e9rard Lachkar",
+      "email": "g.lachkar@agl-marine.com",
+      "domain": "agl-marine.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Vip Tools",
+      "name": "Pascal Duquenne",
+      "email": "p.duquenne@viptools.be",
+      "domain": "viptools.be",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "IMM HM SA",
+      "name": "Pierre Herbiet",
+      "email": "p.herbiet@immhm.be",
+      "domain": "immhm.be",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Racing Colors S.L.",
+      "name": "Ivan Cureses Men\u00e9ndez",
+      "email": "i.cureses@racingcolors.com",
+      "domain": "racingcolors.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Colourfox",
+      "name": "Gary G\u00e1ndara",
+      "email": "g.gandara@colourfox.com",
+      "domain": "colourfox.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Colore Amico S.r.l.",
+      "name": "Marzio Ferrero",
+      "email": "m.ferrero@coloreamico.it",
+      "domain": "coloreamico.it",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "CROP (NonPaints)",
+      "name": "Dexter Driessen",
+      "email": "d.driessen@nonpaints.com",
+      "domain": "nonpaints.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Van Veluw Compressoren B.V.",
+      "name": "Janick van Veluw",
+      "email": "janick@veluwcompressoren.nl",
+      "domain": "veluwcompressoren.nl",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Tipro AB",
+      "name": "Patrick Andersson",
+      "email": "patrick@tipro.se",
+      "domain": "tipro.se",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "F\u00e4rgprodukter Plym & Co AB",
+      "name": "Andreas Plym",
+      "email": "andreas.plym@fargprodukter.se",
+      "domain": "fargprodukter.se",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "C. Christoffersen AS",
+      "name": "Morten Christian Christoffersen",
+      "email": "kikkan@cchristoffersen.no",
+      "domain": "cchristoffersen.no",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Lakkspesialisten AS",
+      "name": "Ole Petter Mortensen",
+      "email": "ole.petter.mortensen@lakkspesialisten.no",
+      "domain": "lakkspesialisten.no",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Merazet S.A.",
+      "name": "Mariusz Raczak",
+      "email": "m.raczak@merazet.pl",
+      "domain": "merazet.pl",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Autokolor-Ukleja Group Sp. z o.o.",
+      "name": "Maciej Ukleja",
+      "email": "maciej@ukleja.com.pl",
+      "domain": "ukleja.com.pl",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Toplac s.r.o.",
+      "name": "Martin \u0160merda",
+      "email": "m.smerda@toplac.cz",
+      "domain": "toplac.cz",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "\u017d\u00c1RSK\u00dd s.r.o.",
+      "name": "Karel \u017d\u00e1rsk\u00fd",
+      "email": "karel.zarsky@lechler.cz",
+      "domain": "lechler.cz",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "TradeTools Pty Ltd",
+      "name": "Jeremy Stewart",
+      "email": "sales@tradetools.com",
+      "domain": "tradetools.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Eastern Auto Paints",
+      "name": "Executive Leadership Team",
+      "email": "orders@autopaints.com.au",
+      "domain": "autopaints.com.au",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Complete Compressed Air Systems",
+      "name": "Executive Operations Team",
+      "email": "sales@ccas.com.au",
+      "domain": "ccas.com.au",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "GPI Automotive (NZ) Ltd",
+      "name": "Colin Edwards",
+      "email": "sales@gpi.com.au",
+      "domain": "gpi.com.au",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Smits Group",
+      "name": "John Greenacre",
+      "email": "sales@smitsgroup.co.nz",
+      "domain": "smitsgroup.co.nz",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "RA Johnstone & Co Ltd",
+      "name": "Michael Head",
+      "email": "cameron@raj.co.nz",
+      "domain": "raj.co.nz",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Ahuja Corporation Private Limited",
+      "name": "Lalit Ahuja",
+      "email": "projects@ahujagroup.in",
+      "domain": "ahujagroup.in",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Bimpex Machines Pvt. Ltd.",
+      "name": "Jaideep Chawla",
+      "email": "bimpex@bimpexindia.com",
+      "domain": "bimpexindia.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Multi Industrial Supplies Pte Ltd",
+      "name": "Alvin Tan",
+      "email": "alvin@multi.com.sg",
+      "domain": "multi.com.sg",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "IWATECH Services & Sales Sdn Bhd",
+      "name": "Executive Management Team",
+      "email": "my@iwatech.com",
+      "domain": "iwatech.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Takeiki Sdn Bhd",
+      "name": "Executive Operations Director",
+      "email": "sales-my@takeiki.net",
+      "domain": "takeiki.net",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "WLC Technology Sdn Bhd",
+      "name": "Michael Lanny",
+      "email": "sales@wlctechnology.com",
+      "domain": "wlctechnology.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Aceplus Technology Services Sdn Bhd",
+      "name": "Jason Chieng",
+      "email": "aceplus.sales@aceplustech.com.my",
+      "domain": "aceplustech.com.my",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "PT. Sinar Mutiara Cakrabuana / PT Riyadi",
+      "name": "Ricky Jap",
+      "email": "web@riyadi.co.id",
+      "domain": "riyadi.co.id",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "KHM Megatools Corp.",
+      "name": "Kim M.",
+      "email": "sales@khmtools.com.ph",
+      "domain": "khmtools.com.ph",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Gigatools Corporation",
+      "name": "Executive Management Team",
+      "email": "info@gigatools.ph",
+      "domain": "gigatools.ph",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Tung Hsin Chang Corporation (THC)",
+      "name": "Jian-Jun Chen",
+      "email": "service@thcgroup.com.tw",
+      "domain": "thcgroup.com.tw",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Trusco Nakayama Corporation",
+      "name": "Tetsuya Nakayama",
+      "email": "info@trusco.co.jp",
+      "domain": "trusco.co.jp",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Yamazen Corporation",
+      "name": "Koji Kishida",
+      "email": "info@yamazen.co.jp",
+      "domain": "yamazen.co.jp",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Spray Tecnologia em Pintura Ltda",
+      "name": "Fernando Baldin",
+      "email": "fernando@spraytecno.com",
+      "domain": "spraytecno.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Celmar Comercial e Importadora Ltda",
+      "name": "Manuel Antonio Rodrigues",
+      "email": "vendas@celmar.com.br",
+      "domain": "celmar.com.br",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "RC Futuro Servi\u00e7o e Com\u00e9rcio Ltda",
+      "name": "Ricardo Corr\u00eaa",
+      "email": "comercial@rcfuturo.com.br",
+      "domain": "rcfuturo.com.br",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Veritec S.A.",
+      "name": "Maria Florencia Dalle Palle",
+      "email": "info@veritec.com.ar",
+      "domain": "veritec.com.ar",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "La Casa del Soplete",
+      "name": "Jorge Zucro",
+      "email": "ventas@lacasadelsoplete.com.ar",
+      "domain": "lacasadelsoplete.com.ar",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Equipos Internacionales S.A.S. (Equinter)",
+      "name": "Executive Management Team",
+      "email": "ventas@equinter.co",
+      "domain": "equinter.co",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Electro Ferro Centro S.A.C. (EFC)",
+      "name": "David M\u00e9linchon Morales",
+      "email": "marketing@efc.com.pe",
+      "domain": "efc.com.pe",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Dimerc Per\u00fa S.A.C.",
+      "name": "Diego \u00c1lvarez del Villar",
+      "email": "ventas@dimerc.pe",
+      "domain": "dimerc.pe",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "SAAT S.A.",
+      "name": "Executive Management Team",
+      "email": "saat@saat.cl",
+      "domain": "saat.cl",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Dan Technique / Danair SpA",
+      "name": "Executive Management Team",
+      "email": "infodan@dan.cl",
+      "domain": "dan.cl",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Dicema S.A.",
+      "name": "Executive Management Team",
+      "email": "ventas@dicema.com.gt",
+      "domain": "dicema.com.gt",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "PV-Solutions, S.A. de C.V.",
+      "name": "Executive Leadership Team",
+      "email": "contacto@pvsolutions.com.mx",
+      "domain": "pvsolutions.com.mx",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Grupo Equipa",
+      "name": "Executive Management Team",
+      "email": "consultor@tecnologiaenaire.mx",
+      "domain": "tecnologiaenaire.mx",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Tecnolog\u00eda en Compresi\u00f3n de Occidente",
+      "name": "Executive Engineering Management",
+      "email": "proyectos@tecencompresion.com",
+      "domain": "tecencompresion.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Air & Power Tools Africa",
+      "name": "Executive Leadership",
+      "email": "sales@airpower.co.za",
+      "domain": "airpower.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Ashtechs (Antoine Ashba & Co.)",
+      "name": "Antoine Ashba",
+      "email": "cairo@ashtechs.com",
+      "domain": "ashtechs.com",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Soci\u00e9t\u00e9 Maghr\u00e9bine d'Equipement (SME)",
+      "name": "Karim Benjelloun",
+      "email": "contact@sme.ma",
+      "domain": "sme.ma",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Specialized Coating Systems (Pty) Ltd (Speccoats)",
+      "name": "Mervyn Cohen",
+      "email": "mervyn@speccoats.co.za",
+      "domain": "speccoats.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Directech (Pty) Ltd",
+      "name": "Peter Erasmus",
+      "email": "peter.erasmus@directech.co.za",
+      "domain": "directech.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Spray Tech SA (Pty) Ltd",
+      "name": "Cassie du Preez",
+      "email": "carina@spraytechsa.co.za",
+      "domain": "spraytechsa.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Surface Coating Technologies (Pty) Ltd (SCT)",
+      "name": "Markus M\u00e4ndlein",
+      "email": "info@sct.co.za",
+      "domain": "sct.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "City Paint & Abrasives (Pty) Ltd (CPA Group)",
+      "name": "Gavin Kinnear",
+      "email": "salesb@cpagroup.co.za",
+      "domain": "cpagroup.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Braemar Paints",
+      "name": "Simon Braemar",
+      "email": "reception@braemar.co.za",
+      "domain": "braemar.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "Autoboys Automotive (Pty) Ltd",
+      "name": "Filum Ho",
+      "email": "info@autoboys.co.za",
+      "domain": "autoboys.co.za",
+      "status": "VERIFIED_MX"
+    },
+    {
+      "company": "AIR VAC (Air Vacuum SARL)",
+      "name": "Hamza Bougrine",
+      "email": "contact@airvac.ma",
+      "domain": "airvac.ma",
+      "status": "VERIFIED_MX"
+    }
+  ],
+  "invalid": [
+    {
+      "company": "Delta Tiger S.A. de C.V.",
+      "name": "Executive Leadership",
+      "email": "contacto@deltatiger.com.mx",
+      "domain": "deltatiger.com.mx",
+      "status": "FAILED_MX"
+    },
+    {
+      "company": "Grupo Solder S.A. de C.V.",
+      "name": "Sergio Gonz\u00e1lez",
+      "email": "hola@mipeleteria.com.mx",
+      "domain": "mipeleteria.com.mx",
+      "status": "FAILED_MX"
+    },
+    {
+      "company": "Sprayquip (Pty) Ltd",
+      "name": "Garth Rattray",
+      "email": "sales@sprayquip.co.za",
+      "domain": "sprayquip.co.za",
+      "status": "FAILED_MX"
+    },
+    {
+      "company": "Air & Vacuum Technologies South Africa",
+      "name": "Ian Robertson",
+      "email": "ian@airvac.co.za",
+      "domain": "airvac.co.za",
+      "status": "FAILED_MX"
+    },
+    {
+      "company": "Global Paint",
+      "name": "Management Team",
+      "email": "contact@globalpaint.dz",
+      "domain": "globalpaint.dz",
+      "status": "FAILED_MX"
+    }
+  ]
+}
