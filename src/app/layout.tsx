@@ -17,7 +17,7 @@ import { ToastProvider } from "@/context/ToastContext";
 import Navbar from "@/components/Navbar";
 import CartDrawer from "@/components/CartDrawer";
 import Footer from "@/components/Footer";
-import StoreLock from "@/components/StoreLock";
+// import StoreLock from "@/components/StoreLock"; // Store is now launched
 
 export default function RootLayout({
   children,
@@ -32,7 +32,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans">
         <ToastProvider>
           <CartProvider>
-            <StoreLock />
             <Navbar />
             <main style={{ flex: 1 }}>
               {children}
