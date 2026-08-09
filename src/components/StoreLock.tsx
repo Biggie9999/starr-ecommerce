@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 // The launch date
 const LAUNCH_DATE = new Date("2026-08-10T00:00:00");
@@ -72,6 +73,7 @@ function useTypingEffect(text: string, speed = 80) {
 }
 
 export default function StoreLock() {
+  const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
   const stars = useRef(generateStars(80));
   const particles = useRef(generateParticles(25));
@@ -94,8 +96,8 @@ export default function StoreLock() {
     };
   }, [isClient, isFinished]);
 
-  // If the countdown is finished, return null (site unlocks automatically)
-  if (isFinished) {
+  // If the countdown is finished or we are on the admin page, return null
+  if (isFinished || (pathname && pathname.startsWith('/admin'))) {
     return null;
   }
 
