@@ -96,14 +96,15 @@ export default function StoreLock() {
     };
   }, [isClient, isFinished]);
 
+  // To prevent hydration mismatch, ensure the first client render matches the server
+  if (!isClient) {
+    if (pathname && pathname.startsWith('/admin')) return null;
+    return <div style={{ position: 'fixed', inset: 0, backgroundColor: '#000000', zIndex: 99999 }} />;
+  }
+
   // If the countdown is finished or we are on the admin page, return null
   if (isFinished || (pathname && pathname.startsWith('/admin'))) {
     return null;
-  }
-
-  // To prevent hydration mismatch, render a solid background on server
-  if (!isClient) {
-    return <div style={{ position: 'fixed', inset: 0, backgroundColor: '#000000', zIndex: 99999 }} />;
   }
 
   const pad = (n: number) => String(n).padStart(2, "0");
