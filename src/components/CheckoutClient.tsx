@@ -10,7 +10,7 @@ const NIGERIAN_STATES = [
   "Abia", "Abuja (FCT)", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", 
   "Cross River", "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", "Kaduna", 
   "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo", "Osun", 
-  "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"
+  "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara", "Test"
 ];
 
 const NORTHERN_STATES = [
@@ -21,6 +21,7 @@ const NORTHERN_STATES = [
 
 function getDeliveryFee(state: string) {
   if (!state) return 0;
+  if (state === "Test") return 100;
   if (state === "Kwara") return 3000;
   if (NORTHERN_STATES.includes(state)) return 8000;
   return 5000;
