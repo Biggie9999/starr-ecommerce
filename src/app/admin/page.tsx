@@ -259,6 +259,7 @@ export default function AdminDashboard() {
                 <option value="Hoodies">Hoodies</option>
                 <option value="Jeans">Jeans</option>
                 <option value="Jorts">Jorts</option>
+                <option value="Jewelries">Jewelries</option>
               </select>
             </div>
             
