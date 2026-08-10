@@ -65,44 +65,17 @@ export async function POST(req: Request) {
     const itemsSubtotal = calculatedTotal;
     calculatedTotal += calculatedDeliveryFee;
 
-    // Verify payment with Paystack
-    if (process.env.PAYSTACK_SECRET_KEY) {
-      try {
-        const paystackRes = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
-          headers: {
-            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`
-          }
-        });
-        const paystackData = await paystackRes.json();
-        
-        if (!paystackData.status || paystackData.data.status !== "success") {
-          return NextResponse.json({ error: "Payment verification failed", details: "Transaction was not successful on Paystack." }, { status: 400 });
-        }
-        
-        // Paystack amount is in kobo (base amount * 100)
-        const expectedAmountKobo = Math.round(calculatedTotal * 100);
-        if (paystackData.data.amount < expectedAmountKobo) {
-          return NextResponse.json({ error: "Payment verification failed", details: "Amount paid is less than the calculated order total." }, { status: 400 });
-        }
-      } catch (paystackError) {
-        console.error("Paystack verification error:", paystackError);
-        return NextResponse.json({ error: "Payment verification failed", details: "Could not reach Paystack to verify transaction." }, { status: 500 });
-      }
-    } else {
-      console.warn("WARNING: PAYSTACK_SECRET_KEY is not set. Skipping server-side payment verification. Do not do this in production!");
-    }
-
-    // Create the order in the database
+    // Create the order in the database FIRST as PENDING
     const fullDeliveryAddress = state ? `${address}\nState: ${state}` : address;
     
-    const order = await prisma.order.create({
+    let order = await prisma.order.create({
       data: {
         customerEmail: email,
         customerName: name,
         phoneNumber: phone,
         deliveryAddress: fullDeliveryAddress,
-        totalAmount: calculatedTotal, // Use server-calculated total
-        status: "PAID",
+        totalAmount: calculatedTotal, 
+        status: "PENDING",
         paystackReference: reference,
         items: {
           create: verifiedItems.map((item: any) => ({
@@ -122,8 +95,62 @@ export async function POST(req: Request) {
       }
     });
 
-    // Send emails
-    await sendOrderEmails(order, calculatedTotal, calculatedDeliveryFee, state || 'N/A');
+    // Verify payment with Paystack
+    if (process.env.PAYSTACK_SECRET_KEY) {
+      try {
+        const paystackRes = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+          headers: {
+            Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`
+          }
+        });
+        const paystackData = await paystackRes.json();
+        
+        if (!paystackData.status || paystackData.data.status !== "success") {
+          return NextResponse.json({ error: "Payment verification failed", details: "Transaction was not successful on Paystack." }, { status: 400 });
+        }
+        
+        // Paystack amount is in kobo (base amount * 100)
+        const expectedAmountKobo = Math.round(calculatedTotal * 100);
+        if (paystackData.data.amount < expectedAmountKobo) {
+          return NextResponse.json({ error: "Payment verification failed", details: "Amount paid is less than the calculated order total." }, { status: 400 });
+        }
+        
+        // Verification passed! Update order to PAID
+        order = await prisma.order.update({
+          where: { id: order.id },
+          data: { status: "PAID" },
+          include: {
+            items: {
+              include: {
+                product: { select: { name: true } }
+              }
+            }
+          }
+        });
+      } catch (paystackError) {
+        console.error("Paystack verification error:", paystackError);
+        return NextResponse.json({ error: "Payment verification failed", details: "Could not reach Paystack to verify transaction." }, { status: 500 });
+      }
+    } else {
+      console.warn("WARNING: PAYSTACK_SECRET_KEY is not set. Skipping server-side payment verification. Do not do this in production!");
+      // If no key is set (e.g. testing), just mark as paid
+      order = await prisma.order.update({
+        where: { id: order.id },
+        data: { status: "PAID" },
+        include: {
+          items: {
+            include: {
+              product: { select: { name: true } }
+            }
+          }
+        }
+      });
+    }
+
+    // Send emails only if PAID
+    if (order.status === "PAID") {
+      await sendOrderEmails(order, calculatedTotal, calculatedDeliveryFee, state || 'N/A');
+    }
 
     return NextResponse.json({ success: true, orderId: order.id });
   } catch (error: any) {
