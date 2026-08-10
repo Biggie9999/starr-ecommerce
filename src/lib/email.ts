@@ -70,12 +70,18 @@ export async function sendOrderEmails(order: any, calculatedTotal: number, calcu
       </div>
     `;
 
-    await resend.emails.send({
-      from: `Starr Shop <${senderEmail}>`,
-      to: adminEmail,
-      subject: `🛒 New Order Received - STARR #${order.id.slice(-6).toUpperCase()}`,
-      html: adminEmailHtml,
-    });
+    try {
+      console.log(`Sending admin email for order ${order.id}...`);
+      await resend.emails.send({
+        from: `Starr Shop <${senderEmail}>`,
+        to: adminEmail,
+        subject: `🛒 New Order Received - STARR #${order.id.slice(-6).toUpperCase()}`,
+        html: adminEmailHtml,
+      });
+      console.log("Admin email sent successfully.");
+    } catch (adminErr) {
+      console.error("Failed to send admin email:", adminErr);
+    }
 
     // --- EMAIL 2: Customer Confirmation ---
     const customerEmailHtml = `
@@ -127,14 +133,20 @@ export async function sendOrderEmails(order: any, calculatedTotal: number, calcu
       </div>
     `;
 
-    await resend.emails.send({
-      from: `Starr Shop <${senderEmail}>`,
-      to: order.customerEmail,
-      subject: `Order Confirmed - STARR #${order.id.slice(-6).toUpperCase()}`,
-      html: customerEmailHtml,
-    });
+    try {
+      console.log(`Sending customer email to ${order.customerEmail}...`);
+      await resend.emails.send({
+        from: `Starr Shop <${senderEmail}>`,
+        to: order.customerEmail,
+        subject: `Order Confirmed - STARR #${order.id.slice(-6).toUpperCase()}`,
+        html: customerEmailHtml,
+      });
+      console.log("Customer email sent successfully.");
+    } catch (customerErr) {
+      console.error("Failed to send customer email:", customerErr);
+    }
 
   } catch (emailError: any) {
-    console.error("Email sending error:", emailError);
+    console.error("Critical error in email preparation:", emailError);
   }
 }
