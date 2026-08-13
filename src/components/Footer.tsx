@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useToast } from "@/context/ToastContext";
 
 const InstagramIcon = () => (
@@ -38,8 +39,8 @@ export default function Footer() {
         marginBottom: '1.5rem'
       }}>
         <div>
-          <div style={{ marginBottom: '1.5rem' }}>
-            <img src="/logo.png" alt="Starr Logo" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+          <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center' }}>
+            <Image src="/logo.png" alt="Starr Logo" width={60} height={60} style={{ objectFit: 'contain' }} />
           </div>
           <p style={{ color: '#9ca3af', lineHeight: 1.6, marginBottom: '1.5rem' }}>
             Premium streetwear designed to elevate your everyday essentials. Crafted with precision.
