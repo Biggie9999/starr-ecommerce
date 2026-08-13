@@ -26,7 +26,7 @@ export default function Footer() {
 
   return (
     <footer style={{ 
-      backgroundColor: '#111827', 
+      backgroundColor: '#000000', 
       color: '#f9fafb', 
       padding: '2rem 1.5rem 1.5rem 1.5rem',
       marginTop: 'auto'
@@ -38,7 +38,9 @@ export default function Footer() {
         marginBottom: '1.5rem'
       }}>
         <div>
-          <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', fontWeight: 800 }}>STARR.</h3>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <img src="/logo.png" alt="Starr Logo" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+          </div>
           <p style={{ color: '#9ca3af', lineHeight: 1.6, marginBottom: '1.5rem' }}>
             Premium streetwear designed to elevate your everyday essentials. Crafted with precision.
           </p>
