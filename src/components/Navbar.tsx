@@ -42,8 +42,9 @@ export default function Navbar() {
     <>
       <nav className="navbar">
         <div className="container" style={{ position: 'relative', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-          <Link href="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-            <img src="/logo.png" alt="Starr Logo" style={{ height: '36px', width: 'auto', objectFit: 'contain' }} />
+          <Link href="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', textDecoration: 'none', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+            <Image src="/logo.png" alt="Starr Logo" width={40} height={40} style={{ borderRadius: '0.25rem', objectFit: 'cover' }} />
+            <span style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '0.05em', color: 'var(--text)' }}>STARR</span>
           </Link>
           <div className="nav-links">
             {shouldShowCart && (
