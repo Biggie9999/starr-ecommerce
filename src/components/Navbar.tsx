@@ -13,6 +13,18 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    // Force scroll to top on homepage and prevent browser from restoring previous scroll position
+    if (pathname === '/') {
+      window.scrollTo(0, 0);
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+    } else {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'auto';
+      }
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > window.innerHeight * 0.5);
     };
@@ -22,7 +34,7 @@ export default function Navbar() {
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   const shouldShowCart = pathname !== '/' || isScrolled;
 
