@@ -1,6 +1,7 @@
 import prisma from "@/lib/prisma";
 import ProductCard from "@/components/ProductCard";
 import CampaignModal from "@/components/CampaignModal";
+import ShopAllButton from "@/components/ShopAllButton";
 
 export const dynamic = 'force-dynamic';
 
@@ -49,18 +50,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       }}>
         
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '6rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <a href="#products" className="btn" style={{ 
-            backgroundColor: 'transparent', 
-            color: 'white', 
-            border: '1px solid white', 
-            textDecoration: 'none', 
-            fontSize: '0.875rem', 
-            letterSpacing: '0.1em',
-            padding: '1rem 3rem', 
-            textTransform: 'uppercase'
-          }}>
-            Shop All
-          </a>
+          <ShopAllButton />
         </div>
       </section>
 
