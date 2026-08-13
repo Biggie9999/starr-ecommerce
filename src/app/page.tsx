@@ -34,7 +34,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         backgroundImage: 'linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("/hero.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center 20%',
-        zIndex: -2,
+        zIndex: 0,
         pointerEvents: 'none'
       }} />
 
@@ -56,7 +56,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       </section>
 
       {/* Product Grid */}
-      <section id="products" className="container" style={{ padding: '3rem 1.5rem' }}>
+      <section id="products" className="container" style={{ padding: '3rem 1.5rem', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
           <h2 style={{ fontSize: '2.5rem', borderBottom: '2px solid var(--foreground)', paddingBottom: '0.5rem', margin: 0 }}>
             {category ? category : "New Arrivals"}
