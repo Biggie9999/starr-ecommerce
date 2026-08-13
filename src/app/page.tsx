@@ -23,7 +23,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       
       {/* Brutalist Editorial Hero Section */}
       <section style={{ 
-        height: '80vh', 
+        height: '100vh', 
         display: 'flex',
         alignItems: 'flex-end',
         background: 'url(/hero.jpg)',
@@ -32,7 +32,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         position: 'relative'
       }}>
         {/* Dark overlay for contrast */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%)' }} />
         
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '4rem', width: '100%' }}>
           <h1 style={{ 
@@ -45,14 +45,14 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
           }}>
             The New <br/><span style={{ color: 'var(--primary)' }}>Standard.</span>
           </h1>
-          <button className="btn" style={{ backgroundColor: 'white', color: 'black', border: 'none' }}>
-            Shop Collection
-          </button>
+          <a href="#products" className="btn" style={{ backgroundColor: 'white', color: 'black', border: 'none', textDecoration: 'none' }}>
+            Shop All
+          </a>
         </div>
       </section>
 
       {/* Product Grid */}
-      <section className="container" style={{ padding: '3rem 1.5rem' }}>
+      <section id="products" className="container" style={{ padding: '3rem 1.5rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
           <h2 style={{ fontSize: '2.5rem', borderBottom: '2px solid var(--foreground)', paddingBottom: '0.5rem', margin: 0 }}>
             {category ? category : "New Arrivals"}

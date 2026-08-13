@@ -15,6 +15,7 @@ import re
 # ==========================================
 HOSTINGER_EMAIL = os.environ.get("HOSTINGER_EMAIL", "your-email@yourdomain.com")
 HOSTINGER_PASSWORD = os.environ.get("HOSTINGER_PASSWORD", "your_password")
+HOSTINGER_SENDER_NAME = os.environ.get("HOSTINGER_SENDER_NAME", "")
 
 SMTP_SERVER = "smtp.hostinger.com"
 SMTP_PORT = 465  # SSL
@@ -29,15 +30,23 @@ def send_hostinger_email(to_email, subject, body_text):
 
     # 1. Create email message
     msg = MIMEMultipart('related')
-    msg["From"] = HOSTINGER_EMAIL
+    if HOSTINGER_SENDER_NAME:
+        msg["From"] = email.utils.formataddr((HOSTINGER_SENDER_NAME, HOSTINGER_EMAIL))
+    else:
+        msg["From"] = HOSTINGER_EMAIL
     msg["To"] = to_email
     msg["Subject"] = subject
     msg["Date"] = email.utils.formatdate(localtime=True)
+    msg["Message-ID"] = email.utils.make_msgid(domain=HOSTINGER_EMAIL.split('@')[-1] if '@' in HOSTINGER_EMAIL else 'dorners-conveyors.com')
+    msg["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
     
     msg_alt = MIMEMultipart('alternative')
     msg.attach(msg_alt)
-    # Changed from plain to html to support your new signature
-    msg_alt.attach(MIMEText(body_text, "html"))
+    
+    # Strip HTML tags for the plain text fallback
+    plain_text = re.sub('<[^<]+>', '', body_text)
+    msg_alt.attach(MIMEText(plain_text, "plain", "utf-8"))
+    msg_alt.attach(MIMEText(body_text, "html", "utf-8"))
     
     # Extract CID images from HTML body and attach them
     cid_matches = re.findall(r'src=["\']cid:([^"\']+)["\']', body_text)
@@ -57,9 +66,10 @@ def send_hostinger_email(to_email, subject, body_text):
     # 2. Send via Hostinger SMTP
     try:
         print(f"Connecting to {SMTP_SERVER}:{SMTP_PORT} via SSL...")
-        with smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) as server:
-            server.login(HOSTINGER_EMAIL, HOSTINGER_PASSWORD)
-            server.send_message(msg)
+        server = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT, timeout=15)
+        server.login(HOSTINGER_EMAIL, HOSTINGER_PASSWORD)
+        server.sendmail(msg["From"], msg["To"], msg.as_string())
+        server.quit()
         print(f"✅ Email successfully sent to {to_email}")
     except Exception as e:
         print(f"❌ Failed to send email via SMTP: {e}")
@@ -68,6 +78,8 @@ def send_hostinger_email(to_email, subject, body_text):
     # 3. Save copy to Hostinger Webmail 'Sent' folder via IMAP
     try:
         print(f"Syncing copy to Hostinger Webmail 'Sent' folder via IMAP ({IMAP_SERVER})...")
+        import socket
+        socket.setdefaulttimeout(15)
         with imaplib.IMAP4_SSL(IMAP_SERVER, IMAP_PORT) as imap:
             imap.login(HOSTINGER_EMAIL, HOSTINGER_PASSWORD)
             
@@ -120,3 +132,4 @@ if __name__ == "__main__":
         print("  python3 send_hostinger.py recipient@example.com 'Subject' 'Email Body String'")
         print("OR")
         print("  python3 send_hostinger.py recipient@example.com 'Subject' body_template.html")
+
