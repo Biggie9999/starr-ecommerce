@@ -49,7 +49,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         position: 'relative'
       }}>
         
-        <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '6rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '10rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
           <ShopAllButton />
         </div>
       </section>
