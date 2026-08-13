@@ -75,19 +75,20 @@ def send_campaign(csv_file, template_file):
         reader = csv.DictReader(f)
         rows = list(reader)
         
+    rows = rows[36:] # Resume from where we stopped
     total_leads = len(rows)
     success_count = 0
     
     print(f"Starting Victron Energy campaign to {total_leads} leads...")
     print("-" * 50)
     
-    for i, row in enumerate(rows, 1):
+    for i, row in enumerate(rows, 37):
         email_addr = row.get("CEO Email", "").strip()
         full_name = row.get("CEO Name", "").strip()
         company = row.get("Company Name", "").strip()
         
         if not email_addr:
-            print(f"[{i}/{total_leads}] Skipping row (No email)")
+            print(f"[{i}] Skipping row (No email)")
             continue
             
         first_name = full_name.split()[0] if full_name and full_name.lower() != 'purchasing manager' else "there"
@@ -102,14 +103,14 @@ def send_campaign(csv_file, template_file):
 """
         final_html = base_template.replace("<!-- BODY_PLACEHOLDER -->", custom_body)
             
-        print(f"[{i}/{total_leads}] Sending to {full_name} at {company} ({email_addr})...")
+        print(f"[{i}] Sending to {full_name} at {company} ({email_addr})...")
         
         formatted_email = f'"{full_name}" <{email_addr}>'
         success = send_hostinger_email(formatted_email, subject, final_html)
         if success:
             success_count += 1
             
-        delay = random.randint(1, 3)
+        delay = 0.5
         print(f"Waiting {delay} seconds before next email...\n")
         time.sleep(delay)
         
