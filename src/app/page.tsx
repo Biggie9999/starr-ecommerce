@@ -31,7 +31,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
       <div style={{
         position: 'fixed',
         inset: 0,
-        background: 'linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url(/hero.jpg)',
+        backgroundImage: 'linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("/hero.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center 20%',
         zIndex: -2,
