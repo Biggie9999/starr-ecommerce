@@ -18,8 +18,6 @@ export default function Navbar() {
             <span style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '0.05em', color: 'var(--text)' }}>STARR</span>
           </Link>
           <div className="nav-links">
-            <Link href="/" className="nav-link">Shop</Link>
-
             <Link 
               href="/cart"
               className="btn btn-secondary" 

@@ -18,7 +18,26 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
   const categories = ["All", "Jeans", "Jorts", "Hoodies", "Tees", "Jewelries"];
 
   return (
-    <div>
+    <div style={{ 
+      '--background': 'transparent', 
+      '--foreground': '#ffffff',
+      '--text': '#ffffff',
+      '--text-muted': 'rgba(255,255,255,0.7)',
+      '--surface': 'rgba(255,255,255,0.05)',
+      '--border': 'rgba(255,255,255,0.1)'
+    } as React.CSSProperties}>
+      
+      {/* Fixed Background for entire page */}
+      <div style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url(/hero.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center 20%',
+        zIndex: -2,
+        pointerEvents: 'none'
+      }} />
+
       <CampaignModal />
       
       {/* Brutalist Editorial Hero Section */}
@@ -26,13 +45,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         height: '100vh', 
         display: 'flex',
         alignItems: 'flex-end',
-        background: 'url(/hero.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center 20%',
         position: 'relative'
       }}>
-        {/* Dark overlay for contrast */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%)' }} />
         
         <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '4rem', width: '100%' }}>
           <h1 style={{ 
