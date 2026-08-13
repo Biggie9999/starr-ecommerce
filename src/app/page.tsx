@@ -48,18 +48,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ c
         position: 'relative'
       }}>
         
-        <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '4rem', width: '100%' }}>
-          <h1 style={{ 
-            color: 'white', 
-            fontSize: 'clamp(3rem, 8vw, 6rem)', 
-            lineHeight: 1, 
-            marginBottom: '1.5rem',
-            maxWidth: '800px',
-            letterSpacing: '-0.02em'
-          }}>
-            The New <br/><span style={{ color: 'var(--primary)' }}>Standard.</span>
-          </h1>
-          <a href="#products" className="btn" style={{ backgroundColor: 'white', color: 'black', border: 'none', textDecoration: 'none' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, paddingBottom: '6rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <a href="#products" className="btn" style={{ backgroundColor: 'white', color: 'black', border: 'none', textDecoration: 'none', fontSize: '1.25rem', padding: '1rem 3rem', fontWeight: 'bold' }}>
             Shop All
           </a>
         </div>

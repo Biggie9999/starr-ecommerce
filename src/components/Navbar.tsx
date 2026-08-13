@@ -1,13 +1,30 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const { items } = useCart();
   const cartCount = items.reduce((total, item) => total + item.quantity, 0);
+  const pathname = usePathname();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > window.innerHeight * 0.5);
+    };
+    
+    // Check initial state
+    handleScroll();
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const shouldShowCart = pathname !== '/' || isScrolled;
 
   return (
     <>
@@ -18,7 +35,8 @@ export default function Navbar() {
             <span style={{ fontWeight: 800, fontSize: '1.5rem', letterSpacing: '0.05em', color: 'var(--text)' }}>STARR</span>
           </Link>
           <div className="nav-links">
-            <Link 
+            {shouldShowCart && (
+              <Link 
               href="/cart"
               className="btn btn-secondary" 
               style={{ position: 'relative', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -48,6 +66,7 @@ export default function Navbar() {
                 </span>
               )}
             </Link>
+            )}
           </div>
         </div>
       </nav>
