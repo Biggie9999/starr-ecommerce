@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 // The launch date
-const LAUNCH_DATE = new Date("2026-08-10T00:00:00");
+const LAUNCH_DATE = new Date("2026-08-17T00:00:00");
 const TYPING_TEXT = "Store is closed.";
 
 function generateStars(count: number) {
@@ -235,7 +235,7 @@ export default function StoreLock() {
         zIndex: 10,
         marginBottom: '2.5rem',
       }}>
-        Launching August 10
+        Launching Monday
       </p>
 
       {/* Social links */}
