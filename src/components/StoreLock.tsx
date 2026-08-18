@@ -86,7 +86,7 @@ export default function StoreLock() {
 
   // Lock body scroll when overlay is active
   useEffect(() => {
-    if (isClient && !isFinished) {
+    if (isClient) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -94,7 +94,7 @@ export default function StoreLock() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isClient, isFinished]);
+  }, [isClient]);
 
   // To prevent hydration mismatch, ensure the first client render matches the server
   if (!isClient) {
@@ -102,8 +102,8 @@ export default function StoreLock() {
     return <div style={{ position: 'fixed', inset: 0, backgroundColor: '#000000', zIndex: 99999 }} />;
   }
 
-  // If the countdown is finished or we are on the admin page, return null
-  if (isFinished || (pathname && pathname.startsWith('/admin'))) {
+  // Allow admin access
+  if (pathname && pathname.startsWith('/admin')) {
     return null;
   }
 
@@ -185,58 +185,7 @@ export default function StoreLock() {
         {typedText}<span className="cursor-blink">|</span>
       </h1>
 
-      {/* Countdown */}
-      <div style={{
-        display: 'flex',
-        gap: 'clamp(1rem, 4vw, 3rem)',
-        position: 'relative',
-        zIndex: 10,
-        marginBottom: '2rem',
-      }}>
-        {[
-          { label: 'Days', value: days },
-          { label: 'Hours', value: hours },
-          { label: 'Mins', value: minutes },
-          { label: 'Secs', value: seconds },
-        ].map(({ label, value }) => (
-          <div key={label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-            <div style={{
-              fontSize: 'clamp(2.5rem, 8vw, 5rem)',
-              fontWeight: 900,
-              color: '#ffffff',
-              lineHeight: 1,
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(220,38,38,0.4)',
-              borderRadius: '0.75rem',
-              padding: 'clamp(0.5rem, 2vw, 1rem) clamp(0.75rem, 3vw, 1.5rem)',
-              minWidth: 'clamp(60px, 12vw, 110px)',
-              textAlign: 'center',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0 0 20px rgba(220, 38, 38, 0.15)',
-              fontVariantNumeric: 'tabular-nums',
-            }}>
-              {pad(value)}
-            </div>
-            <span style={{ fontSize: '0.7rem', letterSpacing: '0.2em', color: '#9ca3af', textTransform: 'uppercase', fontWeight: 600 }}>
-              {label}
-            </span>
-          </div>
-        ))}
-      </div>
 
-      {/* Coming soon */}
-      <p className="animate-fade-up delay-2" style={{
-        fontSize: 'clamp(0.875rem, 2vw, 1.25rem)',
-        letterSpacing: '0.3em',
-        textTransform: 'uppercase',
-        fontWeight: 700,
-        color: 'rgba(255,255,255,0.5)',
-        position: 'relative',
-        zIndex: 10,
-        marginBottom: '2.5rem',
-      }}>
-        Launching Monday
-      </p>
 
       {/* Social links */}
       <div style={{ display: 'flex', gap: '1.5rem', position: 'relative', zIndex: 10 }}>
